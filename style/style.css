@@ -1,0 +1,641 @@
+html, body {
+	height: 100%;
+	}
+
+body {
+	margin: 0;
+	padding: 0;
+	}
+
+#wrapper {
+	height: 100%;
+	width: 1000px;
+	margin: 0 auto;
+	}
+
+#outer {
+/*	border: 2px solid #e5eac9;*/
+	min-height: 100%;
+	background-image:
+		url(/img/marking/background.jpg);
+	margin-bottom: -106px;
+/*	padding: 1px;*/
+	}
+
+.indent {
+	height: 18px;
+	}
+
+#header {
+	border-top: 2px solid #c0c69b;
+	border-left: 2px solid #c0c69b;
+	border-right: 2px solid #c0c69b;
+	padding-bottom: px;
+	width: 960px;
+	margin: 0 auto;
+	}
+
+#header img {
+	display: block;
+	margin: 0 auto;
+	}
+
+#main {
+	border: 2px solid #c0c69b;
+	margin: 20px ;
+	}
+
+
+#center {
+/*	border: 1px solid blue;*/
+	margin: 10px;
+	}
+
+
+#carton1 {
+/*	border: 2px solid red;*/
+	clear: both;
+	height: 80px;
+	}
+
+#carton_reg {
+	border: 1px solid #fff;
+	clear: both;
+	height: 86px;
+	}
+
+#grid{
+	position: absolute;
+	}
+
+
+
+
+/**********TOP MENU************/
+
+
+#topmenu {
+/*	border: 1px solid black;*/
+	height: 70px;
+	background-color: #c0c69b;
+	/* bg image */
+	background-image:
+		url(/img/marking/backgroundtopmenu2.png);
+	background-repeat: no-repeat;
+	background-position: center 64%;
+	}
+
+#topmenu ul {
+/*	border: 1px solid black;*/
+	width: 480px;
+	margin: 15px 0 0 70px;
+	padding: 4px 0;
+	list-style: none;
+	font: 14pt 'Russo One';
+	height: 32px;
+	float: left ;
+/*
+	background-image:
+		url(/img/marking/sprites1.png);
+*/
+	background-repeat: no-repeat;
+	background-position: left -72px;
+	}
+
+#topmenu ul li{
+	float: left;
+	margin: 0;
+	}
+
+#topmenu ul li a {
+/*	border: 1px solid black;	*/
+	display: block;
+	text-decoration: none;
+	color: #fff;
+	}
+
+
+
+
+
+/**********SPRITES************/
+
+
+#topmenu li:first-child a{
+/*	border: 1px solid black;*/
+	padding: 4px 24px 4px 22px;
+	background-image:
+		url(/img/marking/sprites5.png);
+	background-repeat: no-repeat;
+	background-position: 0px -73px;
+}
+#topmenu li:first-child a:hover {
+	background-position: 0px -37px;
+	margin-top: 1px;
+	color: #e5ff7b;
+}
+#topmenu li:first-child a.active {
+	background-position: 0px -37px;
+	margin-top: 0px;
+	color: #e5ff7b;
+	}
+
+
+#topmenu li:first-child + li a {
+/*	border: 1px solid black;*/
+	padding: 4px 28px 4px 26px;
+	margin: 0 2px 0 20px;
+	background-image:
+		url(/img/marking/sprites5.png);
+	background-repeat: no-repeat;
+	background-position: -170px -73px;
+}
+#topmenu li:first-child + li a:hover {
+	background-position: -170px -37px;
+	margin-top: 1px;
+	color: #e5ff7b;
+	}
+
+
+#topmenu li:first-child + li + li a {
+/*	border: 1px solid black;*/
+	padding: 4px 18px 4px 19px ;
+	margin: 0 3px 0 15px;
+	background-image:
+		url(/img/marking/sprites5.png);
+	background-repeat: no-repeat;
+	background-position: -319px -73px;
+}
+#topmenu li:first-child + li + li a:hover {
+	background-position: -319px -37px;
+	margin-top: 1px;
+	color: #e5ff7b;
+	}
+
+
+
+
+
+/**********FORM ENTER*********/
+
+
+form {
+/*	border: 2px solid green;*/
+	float: right;
+	margin: 14px 30px 0 0;
+	}
+
+.pl {
+	/*	border: 1px solid black;*/
+	float: left;
+	display: block;
+	width: 70px;
+	background-color: #e0e5bd;
+	}
+
+input[type=text].pl {
+	margin: 10px;
+	padding: 0;
+	}
+input[type=password].pl {
+	margin: 10px 20px 10px 10px;
+	padding: 0;
+	}
+
+#topmenu input[type='image'] {
+/*	border: 2px solid green;*/
+	display: block;
+	padding: 0;
+	margin: 10px 50px 10px 10px;
+	background-image: url(/img/marking/enter.png);
+	background-repeat: no-repeat;
+}
+#topmenu input[type='image']:hover {
+	background-repeat: no-repeat;
+	background-position: 0px -29px;
+	}
+
+/* EXIT */
+#helloUser{
+/*	border: 2px solid red;*/
+	float: right;
+	margin: 24px 110px 10px 10px;
+	font: 13pt "Russo One";
+	color: #c0c69b;
+}
+#topmenu #exit {
+/*	border: 2px solid red;*/
+	display: block;
+	padding: 2px;
+	margin: 9px 50px 10px 10px;
+	background-image: url(../img/marking/exit.png);
+	background-repeat: no-repeat;
+}
+#topmenu #exit:hover {
+	background-repeat: no-repeat;
+	background-position: 0px -29px;
+	}
+
+
+
+
+
+/**********LEFT MENU************/
+
+
+#borderleftmenu {}
+
+#leftmenu {
+	border: 2px solid #c0c69b;
+	float: left;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+	margin: 10px 0 20px 20px;
+	width: 220px;
+	background-image:
+		url(/img/marking/backgroundlm.jpg);
+	background-position: -220px 0px;
+	background-repeat: repeat-y;
+	}
+
+#up_leftmenu {
+/*	border: 1px solid black;*/
+	border-bottom: 2px solid #c0c69b;
+	background-image:
+		url(/img/marking/backgroundlm.jpg);
+	background-position: 0px 0px;
+	background-repeat: repeat-y;
+	text-align: center;
+	height: 50px;
+	
+	/*border-radius*/
+	-webkit-border-top-left-radius:10px;
+	-webkit-border-top-right-radius:10px;
+	-moz-border-radius-topleft:10px;
+	-moz-border-radius-topright:10px;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	}
+
+#basket {
+/*	border: 1px solid black;*/
+	display: block;
+	height: 25px;
+	padding-top: 14px;
+/*	text-decoration: none;*/
+	color: #654d46;
+	font: 13pt "Trebuchet MS", Helvetica, sans-serif;
+}
+#basket:hover {
+	padding-top: 15px;
+	}
+
+#bottom_leftmenu {
+/*	border: 1px solid black;*/
+	border-top: 2px solid #c0c69b;
+	height: 20px;
+	background-image:
+		url(/img/marking/backgroundlm.jpg);
+	background-repeat: repeat-y;
+	background-position: -440px 0px;
+	height: 40px;
+	
+	/*border-radius*/
+	-webkit-border-bottom-right-radius:10px;
+	-webkit-border-bottom-left-radius:10px;
+	-moz-border-radius-bottomright:10px;
+	-moz-border-radius-bottomleft:10px;
+	border-bottom-right-radius:10px;
+	border-bottom-left-radius:10px;
+	}
+
+#leftmenu ul {
+	margin: 0;
+	padding: 0;
+	}
+
+li.outmenu {
+	list-style: none;
+	font: 10pt 'Russo One';
+	}
+
+p.out {
+/*	border: 1px solid grey;*/
+	width: 150px;
+	margin: 20px 20px 20px 23px;
+	padding: 2px;
+	text-decoration: none;
+	font: 14pt 'Russo One';
+	color: #8a695f;
+}
+p.out:hover {
+	color: #7e4a3b;
+	position: relative;
+	top: 1px;
+	cursor: pointer;
+	}
+
+div.submenu{
+/*	border: 2px solid grey;*/
+	overflow: hidden;
+}
+
+div.bla {
+	border-top: 1px solid #c0c69b;
+	border-bottom: 1px solid #c0c69b;
+	}
+
+.submenu li {
+	list-style: none;
+	width: 120px;
+	margin: 20px 48px;
+	padding: 2px;
+/*	text-decoration: none;*/
+	font: 12pt 'Russo One';
+	color: #767b8f;
+	cursor: pointer;
+}
+.bla li:hover {
+	color: #5a627e;
+	position: relative;
+	left: 1px;
+	}
+
+
+
+
+
+/**********CONTENT************/
+
+
+#wrapContent {
+/*	border: 2px solid black;*/
+	border-left: 2px solid #c0c69b;
+	margin: 0px 0px 0px 260px;	
+	}
+
+.choice {
+	border: 2px solid #c0c69b;
+	width: 190px;
+	float: left;
+	height: 260px;
+	margin: 10px 19px;
+	background-image:
+		url(/img/marking/backgroundchoice.jpg);
+	/*border-radius*/
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+	}
+
+.photo {
+/*	border: 1px solid green;*/
+	height: 150px;
+	width: 170px;
+	margin: 10px;
+	}
+
+.name {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: -5px;
+	}
+
+.price {
+	padding-left: 6px;
+	}
+
+
+.button_choice {
+/*	border: 1px solid green;*/
+	padding: 1px;
+	text-align: center;
+	margin: 20px auto;
+	height: 30px;
+	width: 110px;
+	font: 13pt "Trebuchet MS", Helvetica, sans-serif;
+	background-image:
+		url(/img/marking/bg_button_choice2.png);
+	background-repeat: no-repeat;
+	background-position: 0px -50px;
+}
+.button_choice:hover {
+	background-position: 0px 0px;
+}
+.button_choice a:hover {
+	margin-top: 4px;
+	}
+
+
+.button_choice a {
+/*	border: 1px solid green;*/
+	display: block;
+	height: 25px;
+	margin-top: 3px;
+	text-decoration: none;
+	color: #654d46;
+	}
+
+
+
+
+/**********FOOTER************/
+
+
+#footer {
+	border: 1px solid #e5eac9;
+	margin-top: 20px;
+	width: 1000px;
+	height: 70px;
+	background-image:
+		url(/img/marking/bg_footer.jpg);
+	background-repeat: repeat-x;
+	background-position: 0px -90px;
+	}
+
+#bg_foot_left {
+/*	border: 2px solid black;*/
+	height: 90px;
+	width: 20px;
+	float: left;
+	position: relative;
+	right: 20px;
+	bottom: 20px;
+	background-image:
+		url(/img/marking/bg_footer.jpg);
+	background-repeat: no-repeat;
+	background-position: 1px 1px;
+	}
+
+#bg_foot_right {
+/*	border: 2px solid black;*/
+	height: 90px;
+	width: 20px;
+	float: right;
+	position: relative;
+	left: 20px;
+	bottom: 20px;
+	background-image:
+		url(/img/marking/bg_footer.jpg);
+	background-repeat: no-repeat;
+	background-position: -122px 1px;
+	}
+
+
+
+
+/**********FOOTMENU************/
+
+
+#footmenu {
+/*	border: 2px solid yellow;*/
+	height: 20px;
+	margin: 26px 40px;
+	}
+
+#footmenu ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	}
+
+#footmenu ul li {
+	display: block;
+	float: right;
+	}
+
+#footmenu ul li a {
+	display: block;
+	text-decoration: none;
+	font: 13pt "Russo One";
+	color: #d6d3eb;
+	margin: 0px 30px;
+	}
+#footmenu ul li a:hover {
+	padding-top: 1px;
+	color: #e5ff7b;
+	}
+
+#footmenu a {
+	display: block;
+	text-decoration: none;
+	font: 13pt "Trebuchet MS", Helvetica, sans-serif;
+	color: #e5e3f0;
+	margin: 1px 55px;
+	float: left;
+	}
+#footmenu a:hover {
+	padding-top: 1px;
+	color: #e5ff7b;
+	}
+
+
+
+/**********REGISTER_PAGE************/
+
+#reg_form {
+	float:left;
+	margin: 20px;
+	}
+
+#reg_form p {
+	font: 13pt "Trebuchet MS", Helvetica, sans-serif;
+	}
+
+#reg_form p input[type='submit']{
+	margin: 10px 44px;
+	}
+
+
+
+/**********UPLOADS_PAGE************/
+
+
+#upload {
+/*	border: 2px solid green;*/
+	float:left;
+	}
+
+
+.category {
+/*	border: 1px solid blue;*/
+	margin: 20px;
+	padding: 20px;
+	font: 14pt 'Russo One';
+	color: #8a695f;
+	}
+
+
+.title {
+/*	border: 1px solid red;*/
+	width: 100px;
+	margin: 20px;
+	font: 12pt 'Russo One';
+	color: #767b8f;
+	}
+
+
+.title:hover {
+	color: #7e4a3b;
+	position: relative;
+	top: 1px;
+	cursor: pointer;
+	}
+
+
+.form {
+	float:left;
+	margin: 0 20px 40px 20px;
+	font: 14pt "Trebuchet MS", Helvetica, sans-serif;
+	}
+
+.form input[type='text']{
+	margin-left: 20px;
+	}
+
+.form input[type='file']{
+	margin-left: 20px;
+	}
+
+.form input[type='submit']{
+	
+	}
+
+
+/*NEW PRODUCT*/
+
+#newUpload {
+	clear: both;
+	float:left;
+	}
+
+.newTitle {
+/*	border: 1px solid red;*/
+/*	float:left;*/
+	margin-left: 60px;
+	font: 12pt 'Russo One';
+	color: #767b8f;
+	}
+
+
+.newForm {
+/*	margin: 0 20px 40px 20px;*/
+	clear: both;
+	font: 14pt "Trebuchet MS", Helvetica, sans-serif;
+	color: #8a695f;
+	margin-left: 60px;
+	}
+
+
+.newForm input[type='text']{
+	margin-left: 20px;
+	}
+
+.newForm input[type='file']{
+	margin-left: 20px;
+	}
+
+.newForm input[type='submit']{
+	
+	}
