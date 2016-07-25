@@ -1,5 +1,7 @@
 html, body {
 	height: 100%;
+	/*for ie*/
+	background-color: white;
 	}
 
 body {
@@ -603,7 +605,7 @@ div.bla {
 	}
 
 
-/*NEW PRODUCT*/
+/********* NEW PRODUCT **********/
 
 #newUpload {
 	clear: both;
@@ -639,3 +641,8 @@ div.bla {
 .newForm input[type='submit']{
 	
 	}
+
+
+
+/********* GUEST BOOK **********/
+

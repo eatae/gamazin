@@ -1,5 +1,4 @@
 <?php
-//echo '<pre>';
 function do_html_header($tit){
 	$pageData = data_for_page($_SESSION['valid_user']);
 	

@@ -41,6 +41,7 @@ switch($_POST['page']){
 			$tit = 'All good!';
 			$message = 'Товар успешно добавлен!';
 
+
 			header("Refresh: 2; url= admin/upload_products.php");
 			
 			do_html_header($tit);

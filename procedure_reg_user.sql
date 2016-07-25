@@ -27,7 +27,7 @@ CREATE PROCEDURE reg_user(IN in_login VARCHAR(20),
 			INSERT INTO users (login, password)
 				VALUES (in_login, in_pass);
 			SELECT LAST_INSERT_ID()	INTO dec_user_id;
-			INSERT INTO email (mail, user_id)
+			INSERT INTO email (email, user_id)
 				VALUES (in_mail, dec_user_id);
 			SELECT 'true';
 				
@@ -38,76 +38,3 @@ CREATE PROCEDURE reg_user(IN in_login VARCHAR(20),
 	END;|
 
 delimiter ;
-
-
-
-CALL reg_user('test', 'test', 'test');
-
-
-
-
-
----------------
----------------
-
-
-
-
--- TEST --
-
-
-DROP PROCEDURE IF EXISTS reg;
-
-delimiter |
-
-CREATE PROCEDURE sel_int (IN par1 INT, IN par2 INT)
-	BEGIN
-		SELECT par1;
-	END |
-	
-delimiter ;
-
-
-
----------------
----------------
---Если SELECT ничего не находит - возвращается NULL.
-
-
-DROP PROCEDURE IF EXISTS reg;
-
-delimiter |
-
-CREATE PROCEDURE reg (IN par1 VARCHAR(20), 
-						IN par2 VARCHAR(20) )
-	BEGIN
-		DECLARE dec_param VARCHAR(20);
-		
-		SELECT title FROM products 
-			WHERE title = 'tit' INTO dec_param;
-			
-		SELECT dec_param;
-		
-		IF dec_param IS NULL THEN
-			SELECT 'NULL...';
-			END IF;
-			END |
-			SELECT 'AFTER END';
-		ELSE
-			SELECT 'ARE...';
-			END IF;
-			END |
-			SELECT 'AFTER END';
-		END IF;
-	END |
-
-delimiter ;
-
-
-CALL reg('a','2');
-
-
-
----------------
----------------
-

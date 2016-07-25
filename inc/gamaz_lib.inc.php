@@ -13,9 +13,6 @@ require "gamaz_db.inc.php";
 
 
 
-
-
-
 /** АДМИНКА **/
 /************/
 /*------------------------------*/
@@ -167,14 +164,14 @@ function validPass($pass1, $pass2){
 
 
 
-/** РЕГИСТРАЦИЯ ВХОД И ВЫХОД ПОЛЬЗОВАТЕЛЯ **/
+/** РЕГИСТРАЦИЯ ВХОД И ГОСТЕВАЯ **/
 /***************************************/
 /*-------------------------------------*/
 
 
 /** РЕГИСТРАЦИЯ ПОЛЬЗОВАТЕЛЯ **/
 
-function regUser(/*array $reg*/){
+function regUser(array $reg){
 	global $link;
 	/* extract array $reg */
 	extract($reg);
@@ -183,10 +180,16 @@ function regUser(/*array $reg*/){
 		-if not user - set user, return true
 		-else return 'false' */
 	$sql = "CALL reg_user('$login', '$passwd', '$email')";
-	
-	if(!$result = mysqli_query($link, $sql))
-		throw new Exception('Hi, bad query in regUser '.mysqli_connect_error());
-	
+
+	if(!$result = mysqli_query($link, $sql)) {
+
+		//**test************
+		echo '<pre>';
+		var_dump($result);
+		//**end_test********
+		throw new Exception('Hi, bad query in regUser ' . mysqli_connect_error());
+	}
+
 	if($user = mysqli_fetch_row($result) and $user[0] === 'true')
 		return true;
 	
@@ -221,10 +224,17 @@ function enter($login, $passwd){
 	mysqli_stmt_close($stmt);
 	
 	/* имя есть, проверяем пароль */
-	if($result['password'] != $passwd)
+	if($result['password'] != sha1($passwd))
 		throw new Exception('Неверное имя или пароль, 
 								попробуйте ещё раз 
 								или зарегистрируйтесь...');
 	return true;
 }
+
+
+
+
+
+/** ГОСТЕВАЯ КНИГА **/
+
 
