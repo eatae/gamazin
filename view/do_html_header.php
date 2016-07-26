@@ -23,7 +23,7 @@ function do_html_header($tit){
 			console.log(contentBlock);
 		}
 		function get_Products(title){
-			var url = 'ajax/ajax_select_products.php?title_name='+title;
+			var url = 'ajax/ajax_select_products.php?title_name='+encodeURIComponent(title);
 			request.open('GET', url, true);
 			request.send(null);
 			request.onreadystatechange = function(){
