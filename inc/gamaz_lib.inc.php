@@ -117,7 +117,7 @@ function lookPost(){
 
 /* ФИЛЬТРУЕМ СТРОКИ ФОРМЫ */
 
-function cleanStr($form = ''){
+function cleanStr($form = '') {
 	global $link; //чтоб real_esc_str увидела объект $link
 	$form = mysqli_real_escape_string($link, $form);
 	$form = trim($form);
@@ -155,8 +155,17 @@ function validEmail($addres){
 function validPass($pass1, $pass2){
 	if($pass1 === $pass2){
 		if((strlen($pass1) >= 5) && (strlen($pass1) < 20))
-			return sha1($pass1);
+			return ($pass1);//no sha1
 			//return $pass1;
+	}
+	return false;
+}
+
+
+
+function validLogin($login){
+	if(strlen($login) >= 3){
+		return $login;
 	}
 	return false;
 }
@@ -203,33 +212,37 @@ function regUser(array $reg){
 
 /** ВХОД ПОЛЬЗОВАТЕЛЯ **/
 
-function enter($login, $passwd){
+function enter($login, $passwd = ''){
+
 	global $link;
+
 	$sql = "SELECT password FROM users
-				WHERE login LIKE ?";
-	
+				WHERE login = ?";
+
+
 	$stmt = mysqli_stmt_init($link);
+
 	if(!mysqli_stmt_prepare($stmt, $sql))
 		throw new Exception('Невозможно подготовить запрос');
-	
+
 	mysqli_stmt_bind_param($stmt, 's', $login);
+
 	mysqli_stmt_execute($stmt);
-	$result = mysqli_stmt_get_result($stmt);
-	$result = mysqli_fetch_assoc($result);
-	// ??? login ли нужно проверять (тестим).
-	if(!$login)
-		throw new Exception('Неверное имя или пароль, 
-								попробуйте ещё раз 
-								или зарегистрируйтесь.');
+
+	mysqli_stmt_bind_result($stmt, $result);
+
+	mysqli_stmt_fetch($stmt);
+
 	mysqli_stmt_close($stmt);
 	
 	/* имя есть, проверяем пароль */
-	if($result['password'] != sha1($passwd))
+	if($result != $passwd)
 		throw new Exception('Неверное имя или пароль, 
 								попробуйте ещё раз 
 								или зарегистрируйтесь...');
 	return true;
 }
+//http://php.net/manual/ru/mysqli-stmt.prepare.php
 
 
 
@@ -237,4 +250,50 @@ function enter($login, $passwd){
 
 /** ГОСТЕВАЯ КНИГА **/
 
+function get_user_message()
+{
+	global $link;
+
+	$out_msg = [];
+
+	$sql = "SELECT m.msg, m.date_time, u.login
+              FROM msgs AS m, users as u
+              WHERE m.user_id = u.user_id
+              ORDER BY m.date_time DESC
+              LIMIT 10";
+
+	if (!$result = mysqli_query($link, $sql)) {
+		throw New Exception('Невозможно подготовить запрос' . mysqli_connect_error());
+	}
+
+	while ($row = mysqli_fetch_assoc($result)) { $out_msg[] = $row; }
+
+	return $out_msg;
+}
+
+
+/* save message */
+function save_message($message, $login )
+{
+	global $link;
+
+	$sql = "INSERT INTO msgs(user_id, msg)
+              SELECT user_id, ? as msg
+                FROM users
+                WHERE users.login = ?";
+
+	$stmt = mysqli_stmt_init($link);
+
+	if(!mysqli_stmt_prepare($stmt, $sql))
+		throw new Exception('Невозможно подготовить запрос');
+
+	mysqli_stmt_bind_param($stmt, 'ss', $message, $login);
+
+	mysqli_stmt_execute($stmt);
+
+	mysqli_stmt_close($stmt);
+
+	return true;
+
+}
 

@@ -64,10 +64,4 @@ function do_html_main(){
 			</div>
 		</div>
 <?
-//menu();
-//for showItems.js
-if($_GET['basket']){
-		echo '<script>showItems('.'\''.$_GET['tit'].'\''.','.'\'id_'.$_GET['basket'].'\''.');</script>';
-	}
-}
-?>
+}   //end function

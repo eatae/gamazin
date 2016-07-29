@@ -14,41 +14,39 @@ require_once('view/do_html_footer.php');
 
 
 
-switch($_POST['page']){
-	
-	
+switch($_POST['page']) {
+
+
 	/**** ЗАГРУЗКА ТОВАРА ****/
 	case 'upload':
 		$upload = array();
 		$upload['up_cat'] = cleanStr($_POST['category']);
 		$upload['up_tit'] = cleanStr($_POST['title']);
 		$upload['up_price'] = cleanNum($_POST['price']);
-			
+
 		$upload['file_type'] = getTypeImg($_FILES['img']['type']);
 		$upload['file_dir_tmp'] = $_FILES['img']['tmp_name'];
-		$upload['file_dir_final'] =	'';
-	/* TEST */
+		$upload['file_dir_final'] = '';
+		/* TEST */
 //				echo '<pre>';
 //				print_r($_POST);
 //				print_r($_FILES);
 //				if ($_FILES['img']['type'] == '')
 //					echo 'Пустая строка';
 //				else{echo gettype($_FILES['img']['type']);}
-		try
-		{
+		try {
 			setProduct($upload);
-			
+
 			$tit = 'All good!';
 			$message = 'Товар успешно добавлен!';
 
 
 			header("Refresh: 2; url= admin/upload_products.php");
-			
+
 			do_html_header($tit);
 			do_html_form_handler($message);
 			do_html_footer();
-		}
-		catch(Exception $e){
+		} catch (Exception $e) {
 			do_html_header('Problem: ');
 			$href = '<br><br><a href="javascript:history.back()">Назад</a>';
 			do_html_form_handler($e->getMessage(), $href);
@@ -57,11 +55,12 @@ switch($_POST['page']){
 			do_html_footer();
 			exit;
 		};
-	break;
-	
-	
-	
+		break;
+
+
+
 	/**** РЕГИСТРАЦИЯ ****/
+
 	case 'register':
 		$reg = array();
 		$reg['email'] = cleanStr($_POST['email']);
@@ -71,18 +70,20 @@ switch($_POST['page']){
 
 		$reg['passwd'] = validPass($pass1, $pass2);
 
-		try
-		{
+		try {
 			//проверка заполненности полей
-			if(!lookPost())
+			if (!lookPost())
 				throw new Exception('Заполните все поля');
 
+			if (!validLogin($reg['login']))
+				throw new Exception('Имя должно содержать больше трёх символов');
+
 			//проверка валидности email
-			if(!validEmail($reg['email']))
+			if (!validEmail($reg['email']))
 				throw new Exception('Недопустимый адрес email');
 
 			//проверка пароля
-			if(!$reg['passwd'])
+			if (!$reg['passwd'])
 				throw new Exception('Нужно указать пароль не меньше 5 и не больше 20 символов');
 
 			//регистрация пользователя
@@ -98,9 +99,7 @@ switch($_POST['page']){
 			do_html_header($tit);
 			do_html_form_handler($message);
 			do_html_footer();
-		}
-
-		catch (Exception $e){
+		} catch (Exception $e) {
 			do_html_header('Problem: ');
 			$href = '<br><br><a href="javascript:history.back()">Назад</a>';
 			do_html_form_handler($e->getMessage(), $href);
@@ -109,61 +108,106 @@ switch($_POST['page']){
 //			echo '<a href="javascript:history.back()">Назад</a>';
 			exit;
 		};
-	break;
-	
-	
-	
+		break;
+
+
+
 	/**** ВХОД ****/
+
 	case 'enter':
-		$login = cleanStr($_POST['login']);
-		$passwd = cleanStr($_POST['pass']); //sha1
+
 		$dir = $_POST['dir'];
-		if($dir == '/form_handler.php')$dir = 'index.php';
-		if($dir == '/admin/upload_products.php')$dir = '/admin/upload_products.php';
-		
+
+		if ($dir == '/form_handler.php') $dir = 'index.php';
+		if ($dir == '/admin/upload_products.php') $dir = '/admin/upload_products.php';
+
 		try {
+			if (!lookPost())
+				throw new Exception('Заполните все поля или зарегестрируйтесь');
+
+			/* login */
+			$login = cleanStr($_POST['login']);
+			if (!validLogin($login))
+				throw new Exception('Имя должно содержать больше трёх символов');
+
+			/* password */
+			$passwd = cleanStr($_POST['pass']);//no sha1
+			if (!$passwd or strlen($passwd) < 5)
+				throw new Exception('Неверный пароль');
+
+			/* enter */
 			enter($login, $passwd);
-			$_SESSION['valid_user'] = $login;
-			
+
 			header("Refresh: 2; url=$dir");
-			
+
+			$_SESSION['valid_user'] = $login;
+
 			$message = 'Вы успешно вошли в систему!';
-			
+
 			do_html_header($tit);
 			do_html_form_handler($message);
-		}
-	
-		catch (Exception $e){
+		} catch (Exception $e) {
 			$href = "<br><br><a href='register_form.php'>Регистрация</a>";
 			do_html_header('Problem: ');
 			do_html_form_handler($e->getMessage(), $href);
 			exit;
 		}
-	break;
-	
-	
-	
+		break;
+
+
+
 	/**** ВЫХОД ****/
+
 	case 'exit':
 		$old_user = $_SESSION['valid_user'];
-	
+
 		$dir = $_POST['dir'];
-		if($dir == '/form_handler.php')$dir = 'index.php';
-		if($dir == '/admin/upload_products.php')$dir = '../index.php';
-	
+		if ($dir == '/form_handler.php') $dir = 'index.php';
+		if ($dir == '/admin/upload_products.php') $dir = '../index.php';
+
 		header("Refresh: 2; url=$dir");
-	
-		if(!empty($old_user)){
+
+		if (!empty($old_user)) {
 			$message = 'Вы успешно вышли из системы!';
 			$_SESSION['valid_user'] = '';
 
 			do_html_header($tit);
 			do_html_form_handler($message);
-		}else{
+		} else {
 			$message = 'Не получается выйти из системы!';
 			do_html_header($tit);
 			do_html_form_handler($message);
 		};
-	break;
+		break;
+
+
+
+	/**** ГОСТЕВАЯ ****/
+
+	case 'message':
+		try {
+			/* проверяем заполненность */
+			if( !lookPost() )
+				throw new Exception('Заполните текстовое поле!');
+
+			/* фильтруем текст сообщения */
+			$text = cleanStr($_POST['message']);
+
+			/* записываем сообщение в БД */
+			save_message($text, $_SESSION['valid_user']);
+
+			/* показываем красивое сообщение и перенаправляем */
+			header("Refresh: 2; url='guestbook.php'");
+			do_html_header('All good');
+			do_html_form_handler('Сообщение успешно добавлено!');
+
+		} catch (Exception $e) {
+			$href = '<br><br><a href="javascript:history.back()">Назад</a>';
+			do_html_header('Problem: ');
+			do_html_form_handler($e->getMessage(), $href);
+			exit;
+		}
+		break;
+
 }
 ?>

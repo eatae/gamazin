@@ -1,12 +1,12 @@
 <?php
 // вызов функции в header
-function data_for_page($user=''){
+function data_for_page($user='')
+{
 	$arr = array();
 	$uri = $_SERVER['REQUEST_URI'];
-	
 	$arr[0] = ($uri == '/admin/upload_products.php') ? '../' : '' ;
 	
-	if($user){
+	if ($user) {
 		$arr[1] = "\n<div id='helloUser'>Hello " .$user. " !</div>\n
 			
 					<form method='post' action='".$arr[0]."form_handler.php'>\n
@@ -14,7 +14,7 @@ function data_for_page($user=''){
 						<input type='hidden' name='dir' value='".$uri."'>\n
 						<input type='image' id='exit' src='/img/marking/transparence.png'>\n
 					</form>\n";
-	}else{
+	} else {
 		$arr[1] = "\n<form method='post' action='".$arr[0]."form_handler.php'>\n
 						<input type='hidden' name='page' value='enter'>\n
 						<input type='hidden' name='dir' value='".$uri."'>\n
@@ -25,16 +25,15 @@ function data_for_page($user=''){
 		};
 	
 	
-	switch($uri){
+	switch ($uri) {
 		case "/admin/upload_products.php":
 			$arr[2] = "<script src='../js/uploads_prod.js'></script>";
 			$arr[3] = '../';
 			break;
 		
-		case "/index.php":
+		default:
 			$arr[2] = '';//"<script src='js/showItems.js'></script>";
 			$arr[3] = '';
-			break;
 	};
 	return $arr;
 }

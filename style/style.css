@@ -157,6 +157,11 @@ body {
 	margin-top: 1px;
 	color: #e5ff7b;
 	}
+#topmenu li:first-child + li a.active {
+	background-position: 0px -37px;
+	margin-top: 0px;
+	color: #e5ff7b;
+}
 
 
 #topmenu li:first-child + li + li a {
@@ -173,6 +178,11 @@ body {
 	margin-top: 1px;
 	color: #e5ff7b;
 	}
+#topmenu li:first-child + li + li a.active {
+	background-position: 0px -37px;
+	margin-top: 0px;
+	color: #e5ff7b;
+}
 
 
 
@@ -645,4 +655,72 @@ div.bla {
 
 
 /********* GUEST BOOK **********/
+
+#wrapMessage {
+
+}
+/* сообщение о регистрации */
+#wrapMessage p:first-child {
+	margin: 10px 0 15px;
+	/*padding: 20px 20px 0;*/
+	font: 13pt "Trebuchet MS", Helvetica, sans-serif;
+	color: #767b8f;
+}
+
+.message_box {
+    background-color: floralwhite;
+    margin: 10px 0 15px;
+    border: 1px solid silver;
+    padding: 20px 20px 0;
+}
+
+.message_box .message_user_name {
+    font: 12pt "Trebuchet MS", Helvetica, sans-serif;
+    color: #767b8f;
+}
+
+.message_box .message_time {
+    font: 10pt "Trebuchet MS", Helvetica, sans-serif;
+    color: #767b8f;
+}
+
+.message_box .message {
+    font: 12pt "Trebuchet MS", Helvetica, sans-serif;
+    background-color: gainsboro;
+    border-top: 1px solid silver;
+    padding: 10px 23px;
+    margin: 5px -20px 0;
+}
+
+
+/* форма */
+
+#formMessage form {
+    /*border: 1px solid silver;*/
+    display: block;
+    width: 100%;
+    margin: 15px auto;
+}
+
+#formMessage p {
+    margin: 10px 20px;
+    color: #5a627e;
+    font: 13pt "Trebuchet MS", Helvetica, sans-serif;
+}
+
+#formMessage .text_field {
+    display: block;
+    width: 98%;
+    height: 50px;
+    margin: 0 auto;
+}
+
+#formMessage .message_button {
+    margin: 15px 20px;
+    float: right;
+    color: #5a627e;
+    font: 12pt "Trebuchet MS", Helvetica, sans-serif;
+}
+
+
 

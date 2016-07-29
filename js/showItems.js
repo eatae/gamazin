@@ -1,11 +1,16 @@
-function showItems(tit, /*optional*/anch){
+
+//Функция работала до применения AJAX
+
+function showItems(tit, /*optional*/anch)
+{
 		anch = anch || '';
 		console.log(anch);
 		var menu = <?= $json_menu ?>;
+        console.log(menu);
 		tit = (tit.innerHTML) ? tit.innerHTML : tit;
 		console.log(tit);
 		var content = document.getElementById('content');
-		
+
 		/* если мы вставили в content блок с классом '.choice'
 			то присвой name значение, если нет то присвой false */
 		var name = 
@@ -24,7 +29,7 @@ function showItems(tit, /*optional*/anch){
 		
 		/* заполняем заново */
 		var choice = document.createElement('div');
-		choice.setAttribute('class', 'choice')
+		choice.setAttribute('class', 'choice');
 		
 		var anchor = document.createElement('a');
 		

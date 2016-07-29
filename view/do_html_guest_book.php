@@ -1,6 +1,18 @@
 <?php
-function do_html_guest_book(){
-?>
+function do_html_guest_book($out_msg, $message = '', $href = '')
+{
+    if (!$out_msg): ?>
+
+            <!--MAIN-->
+			<div id='main'>
+				<div id='center'>
+					<?=$message;?>
+					<?=$href;?>
+				</div>
+				<div id='carton_reg'></div>
+			</div>
+		</div>
+<?php return; endif; ?>
 
 			<!--MAIN-->
 			<div id='main'>
@@ -9,9 +21,47 @@ function do_html_guest_book(){
 					
 					<!--CONTENT-->
 					<div id='wrapMessage'>
-					<p class="message">
 
-					</p>
+                        <?php if ( empty($_SESSION['valid_user']) ): ?>
+                            <p>Оставлять отзывы могут только зарегистрированные пользователи.
+                                <br><br><a href="register_form.php">Регистрация</a>
+                            </p>
+                        <?php endif; ?>
+
+<!--                        <div class="message_box">
+                           <div class="message_user_name">Вася написал(а):</div>
+                         <div class="message_time">18:42 18.07.2016</div>
+                          <p class="message">
+                               Здесь текст сообщения.
+                         </p>
+                     </div>
+-->
+                            <?php
+                            foreach ($out_msg as $in_msg): ?>
+                                <div class="message_box">
+                                    <div class="message_user_name"><?=$in_msg['login']?> написал(а):</div>
+                                    <div class="message_time"><?=$in_msg['date_time']?></div>
+                                    <p class="message">
+                                        <?=$in_msg['msg']?>
+                                    </p>
+                                </div>
+                            <?php endforeach; ?>
+
+
+                            <!-- форма -->
+                        <?php if ($_SESSION['valid_user']): ?>
+
+                            <div id='formMessage'>
+                                <form action='form_handler.php' method='post'>
+                                    <input type='hidden' name='page' value='message'>
+                                    <p>Добавить сообщение: </p>
+                                     <textarea class='text_field' maxlength='500' name='message'></textarea>
+                                     <input class='message_button' type='submit' value='Отправить'>
+                                </form>
+                            </div>
+
+                        <?php endif; ?>
+
 						 <!--картонка-->
 						<div id='carton1'></div>
 					</div>
@@ -21,10 +71,4 @@ function do_html_guest_book(){
 			</div>
 		</div>
 <?
-//menu();
-//for showItems.js
-if($_GET['basket']){
-		echo '<script>showItems('.'\''.$_GET['tit'].'\''.','.'\'id_'.$_GET['basket'].'\''.');</script>';
-	}
-}
-?>
+}   //end function

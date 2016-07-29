@@ -1,7 +1,22 @@
 <?php
-function do_html_header($tit){
+function do_html_header( $tit )
+{
 	$pageData = data_for_page($_SESSION['valid_user']);
-	
+
+    // нажатая кнопка меню
+    $active_button = [];
+    switch ($_SERVER['PHP_SELF']) {
+        case '/index.php':
+            $active_button = ["class='active'", '', ''];
+            break;
+        case '/guestbook.php':
+            $active_button = ['', "class='active'", ''];
+            break;
+        case '/contacts.php':
+            $active_button = [ '', '', "class='active'"];
+            break;
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -61,9 +76,9 @@ function do_html_header($tit){
 				<!--TOP MENU-->
 				<div id='topmenu'>
 					<ul>
-						<li><a href='<?=$pageData[3]?>index.php' class='active' href='#'>Почемучто</a></li>
-						<li><a href='#'>Отзывы</a></li>
-						<li><a href='#'>Контакты</a></li>
+						<li><a href='<?=$pageData[3]?>index.php' <?=$active_button[0]?>>Почемучто</a></li>
+                        <li><a href='<?=$pageData[3]?>guestbook.php' <?=$active_button[1]?>>Отзывы</a></li>
+                        <li><a href='<?=$pageData[3]?>#' <?=$active_button[2]?>>Контакты</a></li>
 					</ul>
 					<?=$pageData[1]?>
 					<!-- this form in $pageData[1] --
