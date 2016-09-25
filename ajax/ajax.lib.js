@@ -125,26 +125,3 @@ function basketFromBasket(self)
     }
 
 }
-
-
-
-
-
-/*** УДАЛЕНИЕ ИЗ КОРЗИНЫ (in basket) ***/
-
-function make_fromBasketADel(){
-
-}
-
-
-function fromBasketDel(self){
-
-}
-
-
-
-
-
-
-
-
