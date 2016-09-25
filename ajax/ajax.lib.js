@@ -101,12 +101,16 @@ function basketFromBasket(self)
     }
     else if ( 'del' == buttonClass ) {
         url = 'ajax/ajax_work_basket.php?action=basket_del&data=' + div_id;
-        if(0 === quantity) { return; }
         --quantity;
         sum = price * quantity;
         --all_count;
         all_sum -= price;
+        if(0 === quantity) {
+            div.innerHTML = '';
+            div.style.display = 'none';
+        }
     }
+
 
     request.open('GET', url, true);
     request.send(null);
