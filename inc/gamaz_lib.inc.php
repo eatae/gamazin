@@ -18,6 +18,7 @@ require "gamaz_db.inc.php";
 /*------------------------------*/
 
 /* ВЫБОРКА ПРОДУКТОВ ИЗ БАЗЫ */
+
 function getProducts(){
 	global $link;
 	$prods = array();
@@ -65,15 +66,13 @@ function getTypeImg($type){
 
 
 /* ЗАПИСЬ ПРОДУКТОВ В БАЗУ */
-/**
- * @param array $upload
- * @throws Exception
- */
+
+
 function setProduct(array $upload){
 	global $link;
 	/* extract array $upload */
 	extract($upload);
-	/* 
+	/*
 	PROCEDURE set_products(IN 4 @param):
 		-insert product
 		-make file_dir_final
@@ -273,6 +272,7 @@ function get_user_message()
 
 
 /* save message */
+
 function save_message($message, $login )
 {
 	global $link;
@@ -296,4 +296,82 @@ function save_message($message, $login )
 	return true;
 
 }
+
+
+
+
+
+/** КОРЗИНА **/
+
+
+/* basket for main */
+
+function checkBasketForMain(){
+    $basket = ['count' => 0];
+    if ( isset($_COOKIE['basket']) && !empty($_COOKIE['basket']) ){
+        $basket['basket'] = json_decode($_COOKIE['basket'], true);
+        $basket['count'] = array_sum( $basket['basket'] );
+    }
+    return $basket;
+}
+
+
+
+
+/* basket for basket */
+
+function checkBasketForBasket($basket)
+{
+    $ids = '';
+    $checkBasket = ['all_sum' => 0, 'count' => 0, ];
+    global $link;
+
+
+    /* получаем строку из cookie для вставки в запрос к Db */
+    $basket = json_decode($basket, true);
+    reset($basket);
+    foreach ($basket as $key => $val) {
+        if ((int)$key) {
+            $ids .= $key . ', ';
+        }
+    }
+    $ids = substr($ids, 0, -2); // обрезали пробел с запятой
+
+
+    /* array from Db */
+    $sql = "SELECT product_id, title, price, img
+              FROM products
+              WHERE product_id IN($ids)";
+
+
+    if(!$result = mysqli_query($link, $sql)){
+        return mysqli_connect_error();
+    }
+
+    while($row = mysqli_fetch_assoc($result)){
+		/* массив массивов (ключ id) */
+        $checkBasket[$row['product_id']] = $row;
+        $checkBasket[$row['product_id']]['quantity'] = $basket[$row['product_id']];
+		$checkBasket[$row['product_id']]['sum'] = $row['price'] * $basket[$row['product_id']];
+		/* общие цена и кол-во */
+		$checkBasket['all_sum'] += $row['price'] * $basket[$row['product_id']];
+		$checkBasket['count'] += $basket[$row['product_id']];
+    }
+	mysqli_free_result($result);
+
+    return $checkBasket;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 

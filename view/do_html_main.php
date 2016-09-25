@@ -1,25 +1,26 @@
 <?php
 function do_html_main(){
 	global $menu;
-	$menu = getProducts();// look header
+	$menu = getProducts(); // look header
 ?>
 
-			<!--MAIN-->
+			<!-- MAIN -->
 			<div id='main'>
 				<div id='center'>
 
-						<!--LEFT MENU-->
+						<!-- LEFT MENU -->
 					<div id='borderleftmenu'>
 						<div id='leftmenu'>
 						
 								
 							<div id='up_leftmenu'>
-								<a id='basket' href='#'>Корзина: 0</a>
+							    <!-- BASKET -->
+								<a id='basket' href='#'>Корзина: <?= checkBasketForMain()['count']; ?></a>
 							</div>
 							
 							<ul>
 							<?
-								foreach($menu as $nameCategory => $arrayCategory){
+							foreach($menu as $nameCategory => $arrayCategory):
 							?>
 								<li class='outmenu'>
 									<p class='out'><?=$nameCategory?></p>
@@ -27,11 +28,11 @@ function do_html_main(){
 										<div class='bla'>
 											<ul>
 												<?
-													foreach($arrayCategory as $titleName=>$titleVal){
+												foreach($arrayCategory as $titleName=>$titleVal):
 												?>
-												<li onclick="showProducts(this)" ><?=$titleName?></li>
+												    <li onclick="showProducts(this)" ><?=$titleName?></li>
 												<?
-													}
+												endforeach;
 												?>
 											</ul>
 										</div>
@@ -39,7 +40,7 @@ function do_html_main(){
 								</li>
 								
 							<?
-								}
+							endforeach;
 							?>
 							</ul>
 							

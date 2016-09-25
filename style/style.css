@@ -437,6 +437,7 @@ div.bla {
 }
 .button_choice a:hover {
 	margin-top: 4px;
+    cursor: pointer;
 	}
 
 
@@ -658,31 +659,31 @@ div.bla {
 
 #wrapMessage {
 
-}
+	}
 /* сообщение о регистрации */
 #wrapMessage p:first-child {
 	margin: 10px 0 15px;
 	/*padding: 20px 20px 0;*/
 	font: 13pt "Trebuchet MS", Helvetica, sans-serif;
 	color: #767b8f;
-}
+	}
 
 .message_box {
     background-color: floralwhite;
     margin: 10px 0 15px;
     border: 1px solid silver;
     padding: 20px 20px 0;
-}
+	}
 
 .message_box .message_user_name {
     font: 12pt "Trebuchet MS", Helvetica, sans-serif;
     color: #767b8f;
-}
+	}
 
 .message_box .message_time {
     font: 10pt "Trebuchet MS", Helvetica, sans-serif;
     color: #767b8f;
-}
+	}
 
 .message_box .message {
     font: 12pt "Trebuchet MS", Helvetica, sans-serif;
@@ -690,7 +691,7 @@ div.bla {
     border-top: 1px solid silver;
     padding: 10px 23px;
     margin: 5px -20px 0;
-}
+	}
 
 
 /* форма */
@@ -700,27 +701,276 @@ div.bla {
     display: block;
     width: 100%;
     margin: 15px auto;
-}
+	}
 
 #formMessage p {
     margin: 10px 20px;
     color: #5a627e;
     font: 13pt "Trebuchet MS", Helvetica, sans-serif;
-}
+	}
 
 #formMessage .text_field {
     display: block;
     width: 98%;
     height: 50px;
     margin: 0 auto;
-}
+	}
 
 #formMessage .message_button {
     margin: 15px 20px;
     float: right;
     color: #5a627e;
     font: 12pt "Trebuchet MS", Helvetica, sans-serif;
+	}
+
+
+
+
+
+
+/********* BASKET **********/
+
+
+#in_basket {
+
+
 }
+
+.one_div_basket {
+    margin: 20px 10px 20px 20px;
+	width: 430px;
+    border: 2px solid #c0c69b;
+    /*padding: 14px;*/
+	background-image:
+			url(/img/marking/backgroundchoice.jpg);
+	/*border-radius*/
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+	float: left;
+}
+
+
+
+/*** product id ***/
+.product_id {
+    display: none;
+}
+
+
+
+/*** left col ***/
+.block_left {
+    float: left;
+	}
+
+.block_left img {
+    width: 110px;
+	height: 100px;
+	margin: 10px;
+	}
+
+
+
+/*** center col ***/
+.block_center {
+	margin: 10px;
+	height: 100px;
+	width: 130px;
+	float: left;
+	overflow: hidden;
+	}
+
+.block_center .prod_title{
+	font: 10pt 'Russo One';
+	color: #767b8f;
+	margin: 10px;
+	}
+
+.block_center .del{
+	height: 20px;
+	width: 70px;
+	margin: 10px;
+	background-image: url('../img/marking/gamazik_add.png');
+	background-position: -80px 0;
+	}
+.block_center .del:hover{
+	cursor: pointer;
+	background-position: -80px -40px;
+}
+
+.block_center .add{
+	height: 20px;
+	width: 70px;
+	margin: 10px;
+	background-image: url('../img/marking/gamazik_add.png');
+	}
+.block_center .add:hover{
+	cursor: pointer;
+	background-position: 0 -40px;
+}
+
+
+
+
+/*** right col ***/
+.block_right {
+	margin: 10px 0;
+	height: 100px;
+	width: 130px;
+	float: left;
+	font: 12pt 'Russo One';
+	color: #767b8f;
+	border: 2px solid #c0c69b;
+	/*border-radius*/
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+	overflow: hidden;
+	}
+
+.prod_price {
+	margin: 10px;
+	font: 11pt 'Russo One';
+	color: #8a695f;
+	float: left;
+	}
+
+.operator {
+	margin: 10px;
+	float: left;
+	}
+
+.prod_quantity {
+	margin: 10px;
+	font: 11pt 'Russo One';
+	color: #866a6a;
+	float: left;
+	}
+
+.prod_sum {
+	margin: 10px;
+	margin-top: 64px;
+	clear: left;
+}
+
+.carton_basket {
+	clear: both;
+}
+
+
+
+
+
+/********* DOWN FORM **********/
+
+
+
+.down_form {
+	margin: 20px;
+	border: 2px solid #c0c69b;
+	background-color: #f8fdcc;
+	/*border-radius*/
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	border-radius:10px;
+}
+
+
+.inner_down_form {
+	border: 2px solid #c0c69b;
+	margin: 10px;
+}
+
+
+
+
+/**** left col ****/
+
+.inner_block_left {
+	width: 420px;
+	float: left;
+	/*border: 2px solid #c0c69b;*/
+}
+
+.all_count{
+	height: 50px;
+	width: 210px;
+	float: left;
+	color: #5a627e;
+	font: 12pt "Trebuchet MS", Helvetica, sans-serif;
+	/*border: 2px solid red;*/
+}
+
+.all_count div{
+	margin: 10px;
+}
+
+#all_count {
+	font: 11pt 'Russo One';
+	color: #8a695f;
+}
+
+
+
+.all_sum{
+	height: 50px;
+	width: 200px;
+	float: left;
+	color: #5a627e;
+	font: 12pt "Trebuchet MS", Helvetica, sans-serif;
+	/*border: 2px solid red;*/
+}
+
+.all_sum div{
+	margin: 10px;
+}
+
+#all_sum {
+	font: 11pt 'Russo One';
+	color: #8a695f;
+}
+
+
+
+
+/**** right col ****/
+
+.inner_block_right {
+	width: 420px;
+	float: right;
+	/*border: 2px solid #c0c69b;*/
+}
+
+
+/* email */
+.inner_block_right div	{
+	width: 100px;
+	padding: 10px;
+	color: #5a627e;
+	font: 12pt "Trebuchet MS", Helvetica, sans-serif;
+	float: left;
+	/*border: 2px solid red;*/
+}
+
+.inner_block_right form {
+	padding: 10px;
+	margin: 0;
+	/*border: 2px solid green;*/
+}
+
+.inner_down {
+	text-align: right;
+	padding: 10px;
+	color: #5a627e;
+	font: 10pt "Trebuchet MS", Helvetica, sans-serif;
+	/*border: 2px solid green;*/
+}
+
+
+
+
+
 
 
 

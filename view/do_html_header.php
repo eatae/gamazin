@@ -30,30 +30,7 @@ function do_html_header( $tit )
 	
 	<!-- AJAX -->
 	<script type='text/javascript' src='ajax/xmlHttpRequest.js'></script>
-	<script type='text/javascript'>
-		var contentBlock,
-		request = getXMLHttpRequest();
-		window.onload = function(){
-			contentBlock = document.getElementById('content');
-			console.log(contentBlock);
-		}
-		function get_Products(title){
-			var url = 'ajax/ajax_select_products.php?title_name='+encodeURIComponent(title);
-			request.open('GET', url, true);
-			request.send(null);
-			request.onreadystatechange = function(){
-				if(request.readyState == 4 && request.status == 200){
-					contentBlock.innerHTML = request.responseText;
-				}
-			}
-		}
-		function showProducts(title_name){
-			title_name = title_name.innerHTML || '';
-			console.log(title_name);
-			if(title_name != '')
-				get_Products(title_name);
-		}
-	</script>
+	<script type='text/javascript' src='ajax/ajax.lib.js'></script>
 	<!-- END AJAX -->
 	
 	<!-- tag <script> for upload_products -->
