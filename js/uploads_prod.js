@@ -1,13 +1,19 @@
-window.onload = function(){
+
+
+/* this function call in ajax.lib.js - addEvent window load  */
+
+function uploads_prod(){
 		
 		//получаем все элементы для клика
 		var allTtle = document.querySelectorAll('.title');
-		
+
+		/* TEST */
+
 		//добавляем всем элементам событие click
 		for (var key in allTtle){
 			if(allTtle[key].nodeType == 1)
 				allTtle[key].addEventListener('click', clickTtle);
-		};
+		}
 		
 		
 		//вставить элемент после
@@ -104,5 +110,5 @@ window.onload = function(){
 				if(!nForm)
 					insertAfter(p, this);
 
-			};//end clickTtle
-	}
+			}//end clickTtle
+	};

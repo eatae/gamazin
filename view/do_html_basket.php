@@ -1,10 +1,39 @@
 <?php
 function do_html_basket()
 {
-    $checkBasket = checkBasketForBasket($_COOKIE['basket']);
+    /* if empty basket */
+    if ( empty($_COOKIE['basket']) ) {
 
-//    echo '<pre>';
-//    print_r($inBasket);
+        $back = '<br><br><a href="javascript:history.back()">Назад</a>';
+
+        $errorString = "<!-- MAIN -->
+			            <div id='main'>
+				            <div id='center'>
+
+					        <!--CONTENT-->
+					            <div id='wrapContent_noMenu'>
+						            <div id='content'> </div>
+                                        Ваша корзина пуста
+                                        <br>
+                                        $back
+						                <!--картонка-->
+						                <div id='carton1'></div>
+					                </div>
+						 <!--картонка-->
+<!--					<div id='carton2'></div>-->
+				            </div>
+			            </div>
+		            </div>";
+
+
+
+        echo $errorString;
+
+        return;
+    }
+
+    /* Take the BIG BASKET from DB */
+    $checkBasket = checkBasketForBasket($_COOKIE['basket']);
 ?>
 
 			<!--MAIN-->
@@ -13,6 +42,7 @@ function do_html_basket()
                     <!--CONTENT-->
                         <div id='in_basket'>
 
+                    <!--** FOREACH **-->
                         <?foreach ($checkBasket as $product):
                             if (is_array($product)) : ?>
 
@@ -60,46 +90,17 @@ function do_html_basket()
                           <div class='carton_basket'></div>
                         </div>
 
+<!--          TEST              -->
+                        <? var_dump( $_SESSION );
+                           //var_dump( $_COOKIE );
+                           //var_dump(session_name());
+                        ?>
+
 
                         <!--  DOWN FORM  -->
-                        <div class='down_form'>
-                            <div class='inner_down_form'>
+                        <? getHtmlBlock('basketForm', $checkBasket) ?>
 
 
-                                <!--  DOWN_FORM_QUANTITY   DOWN_FORM_PRICE  -->
-                                <div class='inner_block_left'>
-                                    <div class='all_count'>
-                                        <div>
-                                            Количество: <span id='all_count'><?=$checkBasket['count']; ?></span>
-                                        </div>
-                                    </div>
-                                    <div class='all_sum'>
-                                        <div>
-                                            Стоимость:
-                                            <span id='all_sum'><?=$checkBasket['all_sum']; ?></span>
-                                            кл
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class='inner_block_right'>
-                                    <div>email:</div>
-                                    <form onsubmit='name_action()'>
-                                        <input type='text' name='email'>
-                                        <input type='submit'>
-                                    </form>
-                                </div>
-
-                                <div class='carton_basket'></div>
-
-                                <div class='inner_down'>
-                                    * Можно указать реально существующий email, чтоб посмотреть как работает.
-                                </div>
-
-
-                            </div>
-                        </div>
                         <div id='carton1'></div>
 				</div>
 			</div>

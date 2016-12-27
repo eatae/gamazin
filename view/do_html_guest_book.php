@@ -1,7 +1,7 @@
 <?php
-function do_html_guest_book($out_msg, $message = '', $href = '')
+function do_html_guest_book( $out_msg, $message = 'Сообщений нет', $href = '' )
 {
-    if (!$out_msg): ?>
+    if ( !$out_msg && empty($_SESSION['name']) ): ?>
 
             <!--MAIN-->
 			<div id='main'>
@@ -23,7 +23,7 @@ function do_html_guest_book($out_msg, $message = '', $href = '')
 					<div id='wrapMessage'>
 
                         <?php
-                        if ( empty($_SESSION['valid_user']) ):
+                        if ( empty($_SESSION['name']) ):
                         ?>
                             <p>Оставлять отзывы могут только зарегистрированные пользователи.
                                 <br><br><a href="register_form.php">Регистрация</a>
@@ -57,11 +57,10 @@ function do_html_guest_book($out_msg, $message = '', $href = '')
 
                             <!-- форма -->
                         <?php
-                        if ($_SESSION['valid_user']):
+                        if ( $_SESSION['name'] ):
                         ?>
                             <div id='formMessage'>
-                                <form action='form_handler.php' method='post'>
-                                    <input type='hidden' name='page' value='message'>
+                                <form action='handlers_forms/guest_book.hf.php' method='post'>
                                     <p>Добавить сообщение: </p>
                                      <textarea class='text_field' maxlength='500' name='message'></textarea>
                                      <input class='message_button' type='submit' value='Отправить'>

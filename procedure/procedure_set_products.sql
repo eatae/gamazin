@@ -1,9 +1,5 @@
 
 
----------------
----------------
-
-
 
 DROP PROCEDURE IF EXISTS set_products;
 
@@ -35,54 +31,6 @@ CREATE PROCEDURE set_products(IN in_category VARCHAR(20),
 
 delimiter ;
 
+
+/* TEST */
 CALL set_products('test', 'test', 111, 'test');
-
-
-
-
----------------
----------------
-
-
-
-
-
--- TEST --
-
-
-DROP PROCEDURE IF EXISTS sel_int;
-
-delimiter |
-
-CREATE PROCEDURE sel_int (IN par1 INT, IN par2 INT)
-	BEGIN
-		SELECT par1;
-	END |
-	
-delimiter ;
-
----------------
----------------
-
-
-DROP PROCEDURE IF EXISTS sel_int;
-
-delimiter |
-
-CREATE PROCEDURE sel_int (IN par1 INT, IN par2 INT, )
-	BEGIN
-		IF par2 <> '' THEN
-			SELECT par1;
-		ELSE
-			SELECT par2;
-		END IF;
-	END |
-
-delimiter ;
-
-
----------------
----------------
-
-
-CALL sel_int(1, '2');

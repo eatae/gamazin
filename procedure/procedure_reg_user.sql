@@ -1,10 +1,5 @@
 
 
----------------
----------------
-
-
-
 DROP PROCEDURE IF EXISTS reg_user;
 
 delimiter |
@@ -38,3 +33,9 @@ CREATE PROCEDURE reg_user(IN in_login VARCHAR(20),
 	END;|
 
 delimiter ;
+
+
+/* TEST */
+
+CALL reg_user('User1', 11111, 'user1@mail.ru');
+CALL reg_user('User2', 22222, 'user2admin@mail.ru');

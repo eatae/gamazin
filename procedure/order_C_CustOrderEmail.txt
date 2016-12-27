@@ -1,0 +1,45 @@
+
+	
+
+DROP PROCEDURE IF EXISTS order_C_CustOrderEmail;
+
+delimiter |
+
+CREATE PROCEDURE order_C_CustOrderEmail(
+	IN in_email VARCHAR(26),
+	IN in_userId MEDIUMINT(8),
+	IN in_custId MEDIUMINT(8),
+	IN in_amount MEDIUMINT(8)
+	)
+BEGIN
+	DECLARE dec_OrderId MEDIUMINT(8);
+	DECLARE dec_inspectEmail MEDIUMINT(8) DEFAULT NULL;
+	SELECT user_id FROM email
+		WHERE email = in_email 
+		AND user_id = in_userId
+		AND customer_id = in_custId
+			INTO dec_inspectEmail;
+	IF(dec_inspectEmail IS NOT NULL)
+	THEN
+		INSERT INTO Orders(customer_id, amount) VALUES(in_custId, in_amount);
+		SELECT LAST_INSERT_ID() INTO dec_OrderId;
+		SELECT dec_OrderId;
+	ELSE
+		SELECT NULL;
+	END IF;
+END; |
+
+delimiter ;
+
+
+
+/* TEST */
+
+CALL order_C_CustOrderEmail('User4', '89261752929', 'mail_u4@mail.ru', 4, 200);
+
+
+
+
+
+
+		

@@ -6,6 +6,7 @@ require_once(__DIR__ . '/view/do_html_guest_book.php');
 $title = 'Магазин-Гамазин';
 
 try {
+    // take array messages
     $out_msg = get_user_message();
 
     do_html_header($title);

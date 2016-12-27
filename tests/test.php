@@ -1,37 +1,65 @@
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<pre>
 <?php
 //phpinfo();
-//require __DIR__ . '/inc/gamaz_lib.inc.php';
+require_once(__DIR__ . '/../inc/include.php');
 
 //header("Content-Type: text/html; charset=utf-8");
-define('DB_HOST', 'localhost');
-define('DB_LOGIN', 'root');
-define('DB_PASS', '');
-define('DB_NAME', 'gamazin');
-
-$link = mysqli_connect(DB_HOST, DB_LOGIN, DB_PASS, DB_NAME)
-	or die(mysqli_connect_error());
-
-$prods = array();
-$category = array();
-$title = array();
-$menu = array();
 
 
 
 
-$reg = [
-		'login' => 'www',
-		'passwd' => 'wwwww',
-		'email' => 'www@tt.ru'
-		];
-extract($reg);
-echo $login . '<br>', $email . '<br>';
-$sql = "CALL reg_user('$login', '$passwd', '$email')";
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+$sql = "CALL change_cust_data(5, 'User5', '55555', '89261778779', 'Покупатель N5', 'user5@mail.ru')";
+
 $result = mysqli_query($link, $sql);
-$result = mysqli_fetch_row($result);
-var_dump($result);
+
+
+
+var_dump( mysqli_fetch_assoc($result)['dec_custId'] );
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ *
+function orderEmail($name, $email, $sum)
+{
+	$name = cleanStr($name);
+	$email = cleanStr($email);
+	$sum = cleanNum($sum);
+
+	global $link;
+	$sql = "CALL order_CustOrderEmail('$name', '$email', $sum)";
+
+	if( !$result = mysqli_query($link, $sql) ) {
+		echo 'Bad query';
+		var_dump($result);
+	}
+	echo mysqli_fetch_row($result)[0];
+	//print_r(mysqli_fetch_row($result));
+
+}
+
+orderEmail('Name', 'Email', 200);
 
 
 
@@ -47,9 +75,26 @@ var_dump($result);
 
 
 
-
-
-
+//$category = array();
+//$title = array();
+//$menu = array();
+//
+//
+//
+//
+//$reg = [
+//		'login' => 'www',
+//		'passwd' => 'wwwww',
+//		'email' => 'www@tt.ru'
+//		];
+//extract($reg);
+//echo $login . '<br>', $email . '<br>';
+//$sql = "CALL reg_user('$login', '$passwd', '$email')";
+//$result = mysqli_query($link, $sql);
+//$result = mysqli_fetch_row($result);
+//var_dump($result);
+//
+//
 
 //
 //

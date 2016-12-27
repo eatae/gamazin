@@ -1,10 +1,11 @@
 <?php
 function do_html_header( $tit )
 {
-	$pageData = data_for_page($_SESSION['valid_user']);
+	$pageData = data_for_page();
 
     // нажатая кнопка меню
     $active_button = [];
+
     switch ($_SERVER['PHP_SELF']) {
         case '/index.php':
             $active_button = ["class='active'", '', ''];
@@ -16,7 +17,6 @@ function do_html_header( $tit )
             $active_button = [ '', '', "class='active'"];
             break;
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -26,12 +26,11 @@ function do_html_header( $tit )
 	<link href='/style/style.css' rel='stylesheet' type='text/css'>
 	<link href='https://www.google.com/fonts#ChoosePlace:select/Collection:Russo+One/Script:cyrillic'>
 	<title><?=$tit?></title>
-	<script src='js/leftMenu.js'></script>
+	<script src='/js/leftMenu.js'></script>
 	
 	<!-- AJAX -->
-	<script type='text/javascript' src='ajax/xmlHttpRequest.js'></script>
-	<script type='text/javascript' src='ajax/ajax.lib.js'></script>
-	<!-- END AJAX -->
+	<script type='text/javascript' src='/ajax/xmlHttpRequest.js'></script>
+	<script type='text/javascript' src='/ajax/ajax.lib.js'></script>
 	
 	<!-- tag <script> for upload_products -->
 	<?=$pageData[2]?>
@@ -57,18 +56,9 @@ function do_html_header( $tit )
                         <li><a href='<?=$pageData[3]?>guestbook.php' <?=$active_button[1]?>>Отзывы</a></li>
                         <li><a href='<?=$pageData[3]?>#' <?=$active_button[2]?>>Контакты</a></li>
 					</ul>
-					<?=$pageData[1]?>
-					<!-- this form in $pageData[1] --
-					<form method="post">
-						<input type='text' class='pl' name='login'>
-						<input type='password' class='pl' name='pass'>
-						<input type='image' src='/img/marking/transparence.png'>
-					</form>
-					<form method="post">
-						<input type='image' src='/img/marking/transparence.png'>
-					</form>
-					-->
-					
+
+					<? getHtmlBlock('enter', $pageData); ?>
+
 				</div>
 			</div>
 

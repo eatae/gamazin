@@ -15,13 +15,14 @@ function do_html_main(){
 								
 							<div id='up_leftmenu'>
 							    <!-- BASKET -->
-								<a id='basket' href='#'>Корзина: <?= checkBasketForMain()['count']; ?></a>
+								<a id='basket' href='/basket.php'>Корзина: <?= checkBasketForMain()['count']; ?></a>
 							</div>
-							
+
 							<ul>
 							<?
 							foreach($menu as $nameCategory => $arrayCategory):
 							?>
+
 								<li class='outmenu'>
 									<p class='out'><?=$nameCategory?></p>
 									<div class='submenu'>
@@ -45,6 +46,7 @@ function do_html_main(){
 							</ul>
 							
 							<div id='bottom_leftmenu'>
+							    Hi
 							</div>
 							
 							
@@ -66,3 +68,8 @@ function do_html_main(){
 		</div>
 <?
 }   //end function
+/*
+    echo '<pre>';
+    var_dump($_COOKIE);
+    var_dump( empty($_COOKIE['basket']) );
+*/

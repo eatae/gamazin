@@ -387,6 +387,13 @@ div.bla {
 	margin: 0px 0px 0px 260px;	
 	}
 
+/* if not left menu */
+#wrapContent_noMenu{
+	/*	border: 2px solid black;*/
+	padding: 20px;
+}
+
+
 .choice {
 	border: 2px solid #c0c69b;
 	width: 190px;
@@ -568,7 +575,14 @@ div.bla {
 #upload {
 /*	border: 2px solid green;*/
 	float:left;
-	}
+}
+
+#upload hr{
+    color: #8a695f;
+    background-color: #c0c69b;
+    border: none;
+    height: 2px;
+}
 
 
 .category {
@@ -603,17 +617,22 @@ div.bla {
 	font: 14pt "Trebuchet MS", Helvetica, sans-serif;
 	}
 
-.form input[type='text']{
-	margin-left: 20px;
+.form input {
+    float:right;
+    }
+
+.form input[type='text'] {
+    width: 80px;
 	}
 
 .form input[type='file']{
-	margin-left: 20px;
+	padding-left: 20px;
+    text-align: right;
 	}
 
 .form input[type='submit']{
-	
 	}
+
 
 
 /********* NEW PRODUCT **********/
@@ -621,7 +640,15 @@ div.bla {
 #newUpload {
 	clear: both;
 	float:left;
+	margin: 30px;
 	}
+
+#newUpload hr {
+    color: #8a695f;
+    background-color: #c0c69b;
+    border: none;
+    height: 2px;
+}
 
 .newTitle {
 /*	border: 1px solid red;*/
@@ -646,12 +673,46 @@ div.bla {
 	}
 
 .newForm input[type='file']{
-	margin-left: 20px;
+	margin-left: 50px;
+    text-align: right;
 	}
 
 .newForm input[type='submit']{
 	
 	}
+
+
+
+
+
+#newUpload p {
+    text-align: right;
+}
+
+#newUpload .category {
+    /*	border: 1px solid blue;*/
+    margin-right: 0;
+    padding: 0;
+}
+
+#newUpload label {
+    float: left;
+}
+
+#newUpload input [typy='text']{
+    width: 130px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -904,6 +965,7 @@ div.bla {
 
 .all_count div{
 	margin: 10px;
+    margin-top: 13px;
 }
 
 #all_count {
@@ -924,6 +986,7 @@ div.bla {
 
 .all_sum div{
 	margin: 10px;
+    margin-top: 13px;
 }
 
 #all_sum {
@@ -933,39 +996,442 @@ div.bla {
 
 
 
+.msg_downForm{
+	margin: 10px;
+	height: 50px;
+	width: 400px;
+	float: left;
+	color: #5a627e;
+	font: 12pt "Trebuchet MS", Helvetica, sans-serif;
+}
 
-/**** right col ****/
+#msg_downForm {
+	font: 11pt 'Russo One';
+	color: #8a695f;
+}
+
+
+
+
+
+/**** right block ****/
 
 .inner_block_right {
 	width: 420px;
 	float: right;
+	color: #5a627e;
+	font: 11pt "Trebuchet MS", Helvetica, sans-serif;
 	/*border: 2px solid #c0c69b;*/
 }
 
-
-/* email */
-.inner_block_right div	{
-	width: 100px;
-	padding: 10px;
-	color: #5a627e;
-	font: 12pt "Trebuchet MS", Helvetica, sans-serif;
-	float: left;
-	/*border: 2px solid red;*/
+/*hr*/
+.inner_block_right hr {
+    color: #8a695f;
+    background-color: #c0c69b;
+    border: none;
+    height: 1px;
 }
 
-.inner_block_right form {
-	padding: 10px;
+
+/* показ данных */
+
+.inner_block_right table {
+    margin: 15px;
+    margin-top: 10px;
+    width: 270px;
+}
+
+.inner_block_right table td {
+    padding: 5px 0;
+}
+
+
+.inner_block_right table td+td{
+    text-align: right;
+}
+
+
+
+
+/*href*/
+div.href_change {
+	margin: 5px 10px 15px 10px;
+	text-align: right;
+}
+
+/*size href_change*/
+div.href_change div{
+	display: inline-block;
+	width: 104px;
+	text-align: center;
+
+}
+
+div.href_change div a {
+	color: #8a695f;
+	font-size: 11pt;
+}
+
+
+
+
+
+/************************/
+
+/* форма отправки данных */
+div.submit {
+	margin: 10px;
+    margin-top: 30px;
+}
+
+#form_user {
+	float: none;
+	margin: 5px;
+}
+
+/* ajax - changeUser_inOrder_getForm.php */
+#form_user.change_form {
+    float: none;
+    margin: 10px;
+}
+
+#form_user p {
 	margin: 0;
-	/*border: 2px solid green;*/
+	text-align: right;
+	/*border: 1px solid black;*/
 }
+
+#form_user label {
+	float: left;
+	margin-top: 7px;
+	font-size: 11pt;
+}
+
+#form_user input {
+	margin: 5px 120px 10px 10px;
+	width: 130px;
+	display: inline-block;
+}
+
+#form_user input[type='submit'] {
+	width: 90px;
+	margin: 10px 0;
+	/*margin-right: -100px;*/
+}
+
+
+
+
+
+/**** lower block ****/
 
 .inner_down {
 	text-align: right;
 	padding: 10px;
 	color: #5a627e;
-	font: 10pt "Trebuchet MS", Helvetica, sans-serif;
+	font: 11pt "Trebuchet MS", Helvetica, sans-serif;
 	/*border: 2px solid green;*/
 }
+
+
+
+
+
+
+/********* ADMIN PANEL **********/
+
+
+/* http://codepen.io/nazarelen/pen/GJxayB
+https://html5book.ru/gorizontalnoe-menu/ */
+/**** admin menu ****/
+
+#admin_menu {
+    display: inline-block;
+    /*width: 660px;*/
+    margin: 0 auto 30px;
+}
+
+#admin_menu ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 1em 0;
+    background: #E4EFD1;
+}
+
+
+#admin_menu ul li {
+    display: inline;
+}
+
+#admin_menu ul span {
+    text-decoration: none;
+    transition: .1s linear;
+    padding: 1em;
+    background: rgba(186, 215, 139, .3);
+    border-right: 1px solid #BAD78B;
+    color: #5a627e;
+    font: 11pt "Trebuchet MS", Helvetica, sans-serif;
+}
+
+#admin_menu ul span:hover {
+    background: #BAD78B;
+    cursor: pointer;
+}
+
+/* класс нажатой кнопки */
+#admin_menu ul span.adm_press_button {
+    background-color: #BAD78B;
+}
+
+
+
+
+/* table last orders */
+/* table one order */
+/* таблица последних заказов (admin) */
+
+#table_orders,
+#one_order
+{
+    min-width: 700px;
+    margin: 20px auto;
+    font: 13pt "Trebuchet MS", Helvetica, sans-serif;
+    text-align: center;
+    border-collapse: collapse;
+    border-radius: 20px;
+    box-shadow: 0 0 0 4px #BAD78B;
+    color: #55596d;
+    background-color: white;
+}
+
+
+
+
+#table_orders th,
+#one_order th
+{
+    padding: 10px 16px;
+    background-color: #e5eac9;
+}
+
+#table_orders th:first-child,
+#one_order th:first-child,
+#one_customer th:first-child
+{
+    border-top-left-radius: 20px;
+}
+
+#table_orders th:last-child,
+#one_order th:last-child,
+#one_customer th:last-child
+{
+    border-top-right-radius: 20px;
+}
+
+#table_orders td,
+#one_order td
+{
+    border-top: 4px solid #BAD78B;
+    padding: 8px 16px;
+    background: white;
+}
+
+#table_orders td:first-child,
+#one_order td:first-child,
+#one_customer td:first-child
+{
+    border-bottom-left-radius: 20px;
+}
+
+#table_orders td:last-child,
+#one_order td:last-child,
+#one_customer td:last-child
+{
+    border-bottom-right-radius: 20px;
+}
+
+#one_order tr:last-child td
+{
+    background-color: #e5eac9;
+}
+
+
+
+
+/*
+ кликабельные пункты таблицы
+*/
+.clickable {
+    color: #8a695f;
+}
+#one_order td.clickable:hover,
+#table_orders td.clickable:hover
+{
+    padding-left: 14px;
+    cursor: pointer;
+    color: #4c577e;
+}
+
+/* bolder */
+.bolder
+{
+    font-size: large;
+}
+
+
+
+
+/* таблица покупателей (admin) */
+/* уменьшены шрифты, чтоб всё поместилось (большая табличка) */
+#one_customer
+{
+    min-width: 700px;
+    margin: 20px auto;
+    font: 12pt "Trebuchet MS", Helvetica, sans-serif;
+    text-align: center;
+    border-collapse: collapse;
+    border-radius: 20px;
+    box-shadow: 0 0 0 2px #BAD78B;
+    color: #55596d;
+    background-color: white;
+}
+
+#one_customer th
+{
+    padding: 10px 10px;
+    background-color: #e5eac9;
+}
+
+#one_customer td
+{
+    border-top: 4px solid #BAD78B;
+    padding: 8px 10px;
+    background: white;
+}
+
+#one_customer td.clickable:hover
+{
+    padding-left: 8px;
+    cursor: pointer;
+    color: #4c577e;
+}
+
+
+
+/* num_page_orders */
+/* нумерация страниц заказов */
+/* back - кнопка 'назад' */
+#num_page_orders,
+#back
+{
+    display: inline-block;
+    margin: 0 auto 30px;
+    margin-left: 50%;
+}
+
+#num_page_orders ul,
+#back ul
+{
+    list-style: none;
+    margin: 0 auto;
+    padding: 1em 0;
+    /*background: #E4EFD1;*/
+    margin-left: -50%;
+}
+
+#num_page_orders ul li,
+#back ul li
+{
+    display: inline;
+}
+
+#num_page_orders ul span,
+#back ul span
+{
+    text-decoration: none;
+    transition: .1s linear;
+    padding: 1em;
+    background: rgba(186, 215, 139, .3);
+    border-right: 1px solid #BAD78B;
+    color: #5a627e;
+    font: 11pt "Trebuchet MS", Helvetica, sans-serif;
+}
+
+#num_page_orders ul span:hover,
+#back ul span:hover
+{
+    background: #BAD78B;
+    cursor: pointer;
+}
+
+/* класс нажатой кнопки */
+#num_page_orders ul span.adm_press_button {
+    background-color: #BAD78B;
+}
+
+
+
+
+
+/* SEARCH FORM */
+
+#ajax_box_adminPanel {
+	clear:both;
+}
+
+#ajax_box_searchPanel {
+	clear:both;
+	padding: 20px 10px;
+}
+
+
+
+#search_form {
+    float: left;
+}
+
+#adm_select {
+    padding-left: 6px;
+    height: 40px;
+    font: 12pt "Trebuchet MS",Helvetica,sans-serif;
+}
+
+#adm_select option {
+    padding: 4px;
+    margin: 0 6px;
+}
+
+#search_form input[type='text'] {
+    margin-right: 10px;
+    padding-left: 16px;
+    height: 36px;
+    font: 12pt "Trebuchet MS",Helvetica,sans-serif;
+}
+
+#search_form input[type='submit'] {
+    padding-left: 6px;
+    height: 40px;
+    font: 12pt "Trebuchet MS",Helvetica,sans-serif;
+}
+
+
+/* цвет placeholder */
+#search_form input[type='text']::-webkit-input-placeholder {color: #539348;}
+#search_form input[type='text']::-moz-placeholder          {color: #539348;}
+/* Firefox 19+ */
+#search_form input[type='text']:-moz-placeholder           {color: #539348;}
+/* Firefox 18- */
+#search_form input[type='text']:-ms-input-placeholder      {color: #539348;}
+
+/* скрытие placeholder при фокусе */
+#search_form input[type='text']:focus::-webkit-input-placeholder {color: transparent;}
+#search_form input[type='text']:focus::-moz-placeholder          {color: transparent;}
+#search_form input[type='text']:focus:-moz-placeholder           {color: transparent;}
+#search_form input[type='text']:focus:-ms-input-placeholder      {color: transparent;}
+
+
+
+
 
 
 

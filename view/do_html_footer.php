@@ -9,8 +9,8 @@ function do_html_footer(){
 				<a href="mailto:al-loco@mail.ru">al-loco@mail.ru</a>
 				<ul>
 					<li><a href="#">Контакты</a></li>
-					<li><a href="#">Отзывы</a></li>
-					<li><a href="#">Почемучто</a></li>
+					<li><a href="guestbook.php">Отзывы</a></li>
+					<li><a href="index.php">Почемучто</a></li>
 				</ul>
 			</div>
 		</div>

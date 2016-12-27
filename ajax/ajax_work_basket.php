@@ -26,8 +26,6 @@ if ( isset($_GET['action']) && !empty($_GET['data']) ) {
 
 
 
-
-
 /** main add **/
 
 function addFromMain($data)
@@ -96,20 +94,36 @@ function addFromBasket($data)
 
 function delFromBasket($data)
 {
+    // take small basket from $_COOKIE
     $checkBasket = checkBasketForMain();
 
-    $id = (int)$data;   // data is id
-    $cookieTime = time() + (14 * 24 * 60 * 60);
+    // take id from $_GET
+    $id = (int)$data;
 
     if ( array_key_exists($id, $checkBasket['basket']) )
     {
-        if(0 === $checkBasket['basket'][$id]){
-            return;
-        }
         --$checkBasket['basket'][$id];
-        $cookieBasket = json_encode( $checkBasket['basket'] );
-        setcookie('basket', $cookieBasket, $cookieTime, '/');
+
+        // если удалили последний товар данного наименования
+        if (0 === $checkBasket['basket'][$id]) {
+            // то удаляем этот элемент из корзины
+            unset($checkBasket['basket'][$id]);
+        }
+        // уменьшаем счётчик элементов
         --$checkBasket['count'];
+
+        // если счётчик == 0, удаляем $_COOKIE['basket']
+        if (0 === $checkBasket['count']) {
+            $cookieTime = time() - (14 * 24 * 60 * 60);
+            $cookieBasket = '';
+        }
+        // иначе перезаписываем $_COOKIE['basket']
+        else {
+            $cookieBasket = json_encode( $checkBasket['basket'] );
+            $cookieTime = time() + (14 * 24 * 60 * 60);
+        }
+
+        setcookie('basket', $cookieBasket, $cookieTime, '/');
     }
 
     echo $checkBasket['count'];
