@@ -1,9 +1,9 @@
 <?
-include_once(__DIR__ . '/../inc/include.php');
+include_once(__DIR__ . '/../../inc/include.php');
 $menu = getProducts();
 ?>
 
-                    <form id='upload' action='../handlers_forms/upload.hf.php' enctype='multipart/form-data' method='POST'>
+<form id='upload' action='../../handlers_forms/upload.hf.php' enctype='multipart/form-data' method='POST'>
 					<!-- список товара -->
 					<?
 					foreach($menu as $keyCategory => $arrayCategory):
@@ -27,7 +27,7 @@ $menu = getProducts();
 					?>
 
 				</form>
-				<form id='newUpload' action='../handlers_forms/form_handler.php' enctype='multipart/form-data' method='POST'>
+<form id='newUpload' action='../../handlers_forms/upload.hf.php' enctype='multipart/form-data' method='POST'>
 				    <hr>
 
 					<input type="hidden" name="page" value="upload">

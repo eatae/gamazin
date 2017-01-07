@@ -1,5 +1,31 @@
 <?php
-include_once(__DIR__ . '/adm_ajax_func.php');
+include_once(__DIR__ . '/../../inc/gamaz_db.inc.php');
+
+function takeCustomer_byEmail($email)
+{
+    global $link;
+
+    $out_data = [];
+
+    $sql = "CALL customer_byEmail('$email')";
+
+
+    if (!$result = mysqli_query($link, $sql)) {
+        throw New Exception('Невозможно подготовить запрос' . mysqli_connect_error());
+    }
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $out_data[] = $row;
+    }
+
+    mysqli_free_result($result);
+
+    if (empty($out_data)) {
+        throw New Exception('Нет данных о пользователе');
+    }
+
+    return $out_data;
+}
 
 
 /* DISPLAY */
@@ -11,7 +37,7 @@ try {
     }
 
     /* @search */
-    $customerInfo = takeCustomer_byEmail($_GET['cust_email'], $_GET['search']);
+    $customerInfo = takeCustomer_byEmail($_GET['cust_email']);
 
 
     /* получаем номер предыдущей страницы
@@ -50,7 +76,7 @@ try {
                 <td><?php echo $arr['phone']?></td>
 
                 <!-- TEST -->
-                <td onclick="takeOrderByNumber(this, <?php echo $back ?>)" class="clickable bolder">
+                <td onclick="orderById(this, <?php echo $back ?>)" class="clickable bolder">
                     № <?php echo $arr['order_id']?>
                 </td>
 <!--                <td onclick="test(this);">-->
@@ -95,7 +121,7 @@ if ( !empty($numPage) ) {
     <nav id="back">
         <ul>
             <li>
-                <span onclick="getPageForOrders(<?php echo $numPage ?>)">назад</span>
+                <span onclick="lastOrders(<?php echo $numPage ?>)">назад</span>
             </li>
         </ul>
     </nav>
@@ -108,7 +134,7 @@ elseif ( !empty($double_return) && !empty($_GET['cust_email']) ) {
     <nav id="back">
         <ul>
             <li>
-                <span onclick="getPageForOrders(<?php echo $double_return ?>)">назад</span>
+                <span onclick="lastOrders(<?php echo $double_return ?>)">назад</span>
             </li>
         </ul>
     </nav>

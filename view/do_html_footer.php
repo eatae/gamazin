@@ -8,7 +8,7 @@ function do_html_footer(){
 			<div id='footmenu'>
 				<a href="mailto:al-loco@mail.ru">al-loco@mail.ru</a>
 				<ul>
-					<li><a href="#">Контакты</a></li>
+					<li><a href="contacts.php">Контакты</a></li>
 					<li><a href="guestbook.php">Отзывы</a></li>
 					<li><a href="index.php">Почемучто</a></li>
 				</ul>

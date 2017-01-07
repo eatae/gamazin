@@ -1,11 +1,12 @@
 <?php
-include_once(__DIR__ . '/../inc/gamaz_db.inc.php');
+include_once(__DIR__ . '/../../inc/gamaz_db.inc.php');
 
-
-function get_last_orders($pageNumber = 0, $in_date = null)
+function get_orders($pageNumber = 0)
 {
     global $link;
-    $out_msg = [];
+
+    $out_data = [];
+
     $pageNumber *= 10;
 
     $sql = "CALL orders_pagination($pageNumber)";
@@ -15,14 +16,22 @@ function get_last_orders($pageNumber = 0, $in_date = null)
     }
 
     while ($row = mysqli_fetch_assoc($result)) {
-        $out_msg[] = $row;
+        $out_data[] = $row;
     }
 
-    return $out_msg;
+    mysqli_free_result($result);
+
+    if (empty($out_data)) {
+        throw New Exception('Нет данных о заказе');
+    }
+
+    return $out_data;
 }
 
 
-
+/*
+ *  count pagination
+ */
 function get_page_numbers($quantity)
 {
     $arr = [];
@@ -36,21 +45,17 @@ function get_page_numbers($quantity)
 }
 
 
-
-
-
-
 /* DISPLAY */
 
 try {
     /* также получим из базы ['count'] всех записей */
     if ( !empty($_GET['page']) ) {
-        $orders = get_last_orders($_GET['page']);
+        $orders = get_orders($_GET['page']);
         //var_dump($orders);
         $numbers = get_page_numbers($orders[0]['count']);
     }
     else {
-        $orders = get_last_orders();
+        $orders = get_orders();
         //var_dump($orders);
         $numbers = get_page_numbers($orders[0]['count']);
     }
@@ -70,10 +75,10 @@ try {
         foreach ($orders as $arr):
         ?>
         <tr>
-            <td onclick="takeOrderByNumber(this)" class="clickable">
+            <td onclick="orderById(this)" class="clickable">
                 № <?php echo $arr['order_id']?>
             </td>
-            <td onclick="takeCustomerByEmail(this)" class="clickable">
+            <td onclick="customerByEmail(this)" class="clickable">
                 <?php echo $arr['email']?>
             </td>
             <td><?php echo $arr['amount']?> кл.</td>
@@ -90,6 +95,7 @@ try {
 
             /* pagination */
             $length = count($numbers);
+
             for( $cnt=0; $length > $cnt; $cnt++):
                 /* отображаем номера страниц и делаем нажатымы
                    с счётчиками намудрили, чтоб нумерация шла с единицы

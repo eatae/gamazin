@@ -5,7 +5,7 @@
 		
 /******* FUNCTION TOGGLE *******/
 // плавное открытие-закрытие меню
-// присваеваем событие с этой функцией при загарузке страници
+// цепляем к domLoaded
 		
 		function toggle(){
 			var thisBla = this.nextSibling.nextSibling.firstChild.nextSibling,
@@ -20,7 +20,7 @@
 					clearInterval(open);
 					thisBla.style.marginTop = '0';
 				}
-			};
+			}
 			
 			function smoothClose(){
 				thisBlaMargin -= 10;
@@ -29,21 +29,21 @@
 					clearInterval(close);
 					thisBla.style.marginTop = '-' + thisBlaHeight +'px';
 				}
-			};
+			}
 			
 			/* если margin-top не равен '0px', делаем плавно '0px' */
 			if(thisBlaMargin){ //ждём либо число, либо 0.
 				var open = setInterval(smoothOpen, 20);
 			}else{
 				var close = setInterval(smoothClose, 20);
-			};					
+			}
 		
 		}  
 		
 		
 		
 /******* CLOSE MENU *******/
-// закрытие submenu на его же размер (используем при загрузке DOM)
+// закрытие submenu на его же размер (используем при domLoaded)
 		
 		function closeMenu(divs){
 			for(i=0; i<divs.length; i++){
@@ -86,7 +86,7 @@
 			}
 			
 			if(document.addEventListener){
-				document.addEventListener('DOMContentLoaded', ready, false)
+				document.addEventListener('DOMContentLoaded', ready, false);
 			// IE
 			}else if(document.attachEvent){
 				try{
@@ -160,11 +160,11 @@
 			   если совпадает значит добавляли в корзину,
 			   открываем нужный пункт */
 			for(i=0; i<menu.length; i++){
-				addEvent(menu[i], 'click', toggle); //добав. событие на click
+				addEvent(menu[i], 'click', toggle); // добав. событие на click
 				if(get && menu[i].innerHTML == get) { // сравниваем с get
 					div = menu[i].nextSibling.nextSibling.firstChild.nextSibling;
 					divMargin = parseInt(div.style.marginTop);
-					divOpen = setInterval(divSmoothOpen, 10); // откр после добав товара
+					divOpen = setInterval(divSmoothOpen, 10); // откр. после добав товара
 				}
 			}
 			
@@ -175,10 +175,21 @@
 					clearInterval(divOpen);
 					div.style.marginTop = '0';
 				}
-			};
+			}
+
 		}
 		
 		
 /******* DOMContentLoaded *******/
-		bindReady(handlerEvent);
+bindReady(handlerEvent);
+
+
+/******* Blink for add products *******/
+function blink(self) {
+	var block = self.parentNode.parentNode;
+	block.className += 'blink';
+	setTimeout(function () {
+		block.className -= 'blink';
+	}, 100);
+}
 		

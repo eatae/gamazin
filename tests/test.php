@@ -5,15 +5,75 @@ require_once(__DIR__ . '/../inc/include.php');
 //header("Content-Type: text/html; charset=utf-8");
 
 
+$json = '["a","b","c"]';
+var_dump($json);
+
+$json = json_decode($json);
+
+
+var_dump(empty(null));
+
+
+/////////////////////////////////////////////////////
+
+
+/*
+ * EMAIL
+ * stmt (http://php.net/manual/ru/mysqli.prepare.php)
+ * @email string GET
+ * @search string GET
+
+function takeCustomer_byEmail($email, $search)
+{
+    global $link;
+
+    $sql = (!empty($search)) ?
+        "CALL customer_byEmailSearch(?)" :
+        "CALL customer_byEmail(?)";
+
+
+    if (!$stmt = mysqli_prepare($link, $sql)) {
+        throw new Exception('Невозможно подготовить запрос');
+    }
+
+    mysqli_stmt_bind_param($stmt, 's', $email);
+
+    if ( !mysqli_stmt_execute($stmt) ) {
+        throw new Exception('EXECUTE:' . $stmt->error);
+    }
+
+    $result = mysqli_stmt_get_result($stmt);
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $out_data[] = $row;
+    }
+
+    mysqli_stmt_close($stmt);
+
+    mysqli_free_result($result);
+
+    if ( empty($out_data) ) {
+        throw New Exception('Нет данных о пользователе');
+    }
+
+
+    return $out_data;
+
+}
+
+
+try {
+    var_dump(takeCustomer_byEmail('al-loco@mail.ru', ''));
+} catch (Exception $e){
+    echo $e->getMessage();
+}
 
 
 
 
 
 
-
-
-
+//////////////////////////////////////
 
 
 
@@ -31,7 +91,7 @@ var_dump( mysqli_fetch_assoc($result)['dec_custId'] );
 
 
 
-
+////////////////////////////////////////
 
 
 

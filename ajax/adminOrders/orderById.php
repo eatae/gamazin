@@ -1,5 +1,31 @@
 <?php
-include_once(__DIR__ . '/adm_ajax_func.php');
+include_once(__DIR__ . '/../../inc/gamaz_db.inc.php');
+
+
+function takeOrder_byNumber($order_num)
+{
+    global $link;
+
+    $out_data = [];
+
+    $sql = "CALL order_byNumber($order_num)";
+
+    if (!$result = mysqli_query($link, $sql)) {
+        throw New Exception('Невозможно подготовить запрос' . mysqli_connect_error());
+    }
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $out_data[] = $row;
+    }
+
+    mysqli_free_result($result);
+
+    if (empty($out_data)) {
+        throw New Exception('Нет данных о заказе');
+    }
+
+    return $out_data;
+}
 
 
 
@@ -10,8 +36,10 @@ try {
     if (empty($_GET['order_num'])) {
         throw New Exception('Нет номера заказа');
     }
+
     /* обрабатываем строку из $_GET, получаем int */
-    $order_num = (int)explode(' ', $_GET['order_num'])[1];
+    $order_num = (int)$_GET['order_num'];
+
     /* получаем массив с данными о заказе */
     $orderInfo = takeOrder_byNumber($order_num);
 
@@ -64,7 +92,7 @@ if( !empty($numPage) ) {
     <nav id="back">
         <ul>
             <li>
-                <span onclick="getPageForOrders(<?php echo $numPage ?>)">назад</span>
+                <span onclick="lastOrders(<?php echo $numPage ?>)">назад</span>
             </li>
         </ul>
     </nav>
@@ -81,7 +109,8 @@ elseif ( !empty($double_return) && !empty($_GET['cust_email']) ) {
     <nav id="back">
         <ul>
             <li>
-                <span onclick="takeCustomerByEmail('<?php echo $_GET['cust_email'] ?>', <?php echo $double_return ?>)">назад</span>
+                <span
+                    onclick="customerByEmail('<?php echo $_GET['cust_email'] ?>', <?php echo $double_return ?>)">назад</span>
             </li>
         </ul>
     </nav>
@@ -95,7 +124,7 @@ elseif ( !empty($_GET['cust_email']) ) {
     <nav id="back">
         <ul>
             <li>
-                <span onclick="takeCustomerByEmail('<?php echo $_GET['cust_email'] ?>')">назад</span>
+                <span onclick="customerByEmail('<?php echo $_GET['cust_email'] ?>')">назад</span>
             </li>
         </ul>
     </nav>
