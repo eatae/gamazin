@@ -1,0 +1,104 @@
+
+/* НУМЕРАЦИЯ СТРАНИЦ + ВЫБОРКА В АДМИНКЕ */
+	
+
+	
+	
+DROP PROCEDURE IF EXISTS orders_pagination;
+
+delimiter |
+
+CREATE PROCEDURE orders_pagination(
+	IN in_start_display_row MEDIUMINT(3)
+)
+BEGIN
+	CREATE TEMPORARY TABLE IF NOT EXISTS tmp
+		SELECT COUNT(order_id) as count FROM Orders;
+		
+	SELECT O.order_id, O.amount, E.email, O.order_date, T.count 
+	FROM Orders O, tmp T, Email E
+	WHERE O.customer_id = E.customer_id
+	ORDER BY O.order_date DESC
+	LIMIT in_start_display_row, 10;
+	
+	DROP TEMPORARY TABLE IF EXISTS tmp;
+END; |
+
+delimiter ;
+
+
+/* TEST */
+
+CALL orders_pagination(0);
+	
+	
+	
+	
+	
+	
+	
+	
+DROP TABLE IF EXISTS tmp;
+	
+	
+CREATE TEMPORARY TABLE tmp
+	SELECT COUNT(order_id) as count FROM Orders;
+
+
+SELECT O.order_id, O.amount, E.email, O.order_date, T.count 
+	FROM Orders O, tmp T, Email E
+	WHERE O.customer_id = E.customer_id
+	ORDER BY O.order_date DESC
+	LIMIT 0, 10;
+	
+	
+	
+	
+	
+	
+/***** поиск расхождений в таблицах *****/
+	
+	
+SELECT O.order_id, O.amount, E.email, O.order_date, T.count 
+	FROM Orders O, tmp T, Email E
+	WHERE O.customer_id = E.customer_id
+	ORDER BY O.order_date DESC;
+	
+	
+/* does not work */
+DELETE FROM Orders WHERE customer_id != ANY (SELECT customer_id FROM Email);
+	
+	
+/* does not work */
+DELETE FROM Order_Items WHERE customer_id != ANY (SELECT customer_id FROM Orders WHERE customer_id != ANY (SELECT customer_id FROM Email));
+	
+	
+
+	
+/* working */
+SELECT O.order_id FROM Orders O WHERE O.customer_id NOT IN(SELECT E.customer_id FROM Email E WHERE E.customer_id IS NOT NULL);
+
+SELECT O.customer_id FROM Orders O WHERE O.customer_id NOT IN(SELECT E.customer_id FROM Email E WHERE E.customer_id IS NOT NULL);
+
+
+
+/* working */
+CREATE TEMPORARY TABLE del_c
+	SELECT O.customer_id FROM Orders O WHERE O.customer_id NOT IN(SELECT E.customer_id FROM Email E WHERE E.customer_id IS NOT NULL);
+	
+	
+CREATE TEMPORARY TABLE del_o
+	SELECT O.order_id FROM Orders O WHERE O.customer_id NOT IN(SELECT E.customer_id FROM Email E WHERE E.customer_id IS NOT NULL);
+	
+DELETE FROM Order_Items WHERE Order_id IN (SELECT order_id FROM del_o);
+
+DELETE FROM Orders WHERE Order_id IN (SELECT order_id FROM del_o);
+	
+DELETE FROM Customers WHERE customer_id IN (SELECT customer_id FROM del_c);
+	
+
+	
+
+
+
+

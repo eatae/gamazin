@@ -1,0 +1,6 @@
+SELECT C.name, C.phone
+	FROM Customers C
+	INNER JOIN Users U
+	ON C.customer_id = U.customer_id
+	WHERE U.user_id = 1
+		AND U.customer_id = 355;

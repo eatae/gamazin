@@ -1,0 +1,162 @@
+
+	
+DROP PROCEDURE IF EXISTS customer_byEmail;
+
+delimiter |
+
+CREATE PROCEDURE customer_byEmail(
+	IN in_email VARCHAR(26)
+	)
+
+BEGIN
+
+	CREATE TEMPORARY TABLE IF NOT EXISTS tmp
+		SELECT customer_id, email FROM email
+		WHERE email = in_email;
+		
+	SELECT T.customer_id, T.email, C.name, C.phone,
+		O.order_id, O.amount, O.order_date, US.login
+		FROM tmp T
+		INNER JOIN Customers C
+			ON T.customer_id = C.customer_id
+		INNER JOIN Orders O
+			ON T.customer_id = O.customer_id
+		LEFT JOIN Users US
+			ON T.customer_id = US.customer_id;
+			
+	DROP TEMPORARY TABLE IF EXISTS tmp;
+
+END; |
+
+delimiter ;
+
+
+
+/* TEST */
+
+CALL customer_byEmail('al-loco@mail.ru');
+
+
+
+
+
+
+
+
+/*  */
+
+
+
+
+/* DRAFT */
+
+in_email = al-loco@mail.ru
+
+dec_custId = 370;
+
+
+SELECT customer_id FROM Email
+	WHERE email = al-loco@mail.ru
+	INTO dec_custId;
+	
+SELECT C.customer_id, C.name,
+C.phone, O.order_id, O.amount, O.order_date, US.login
+	FROM Customers C
+	INNER JOIN Orders O
+		ON C.customer_id = 357
+		AND C.customer_id = O.customer_id
+	LEFT JOIN Users US
+		ON US.customer_id = C.customer_id;
+		
+		
+		
+		
+		
+		
+		
+/*********************************/
+	
+	
+	
+	
+	
+
+	
+DROP PROCEDURE IF EXISTS customer_byEmail;
+
+delimiter |
+
+CREATE PROCEDURE customer_byEmail(
+	IN in_email VARCHAR(26)
+	)
+
+BEGIN
+	
+	CREATE TEMPORARY TABLE tmp
+	SELECT customer_id FROM email
+		WHERE email = in_email;
+		
+	SELECT C.customer_id, C.name,
+	C.phone, O.order_id, O.amount, O.order_date, 
+	T.customer_id, US.login
+		FROM Customers C, tmp T
+		INNER JOIN Orders O
+			ON C.customer_id = T.customer_id
+			AND C.customer_id = O.customer_id
+		LEFT JOIN Users US
+			ON US.customer_id = C.customer_id;
+
+END; |
+
+delimiter ;
+
+
+
+/* TEST */
+
+CALL customer_byEmail('al-loco@mail.ru');
+
+
+
+
+
+
+
+
+DROP TEMPORARY TABLE IF EXISTS tmp;
+
+CREATE TEMPORARY TABLE IF NOT EXISTS tmp
+	SELECT customer_id, email FROM email
+		WHERE email = 'al-loco@mail.ru';
+		
+		
+	SELECT C.customer_id, C.name,
+	C.phone, O.order_id, O.amount, O.order_date, US.login
+	FROM Customers C
+	INNER JOIN Orders O
+		ON C.customer_id = dec_custId
+		AND C.customer_id = O.customer_id
+	LEFT JOIN Users US
+		ON US.customer_id = C.customer_id;
+
+
+
+	
+
+			
+			
+
+			
+	SELECT T.customer_id, T.email, C.name, C.phone,
+		O.order_id, O.amount, O.order_date, US.login
+		FROM tmp T
+		INNER JOIN Customers C
+			ON T.customer_id = C.customer_id
+		INNER JOIN Orders O
+			ON T.customer_id = O.customer_id
+		LEFT JOIN Users US
+			ON T.customer_id = US.customer_id;
+
+
+
+	

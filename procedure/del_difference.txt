@@ -1,0 +1,81 @@
+
+/* НУМЕРАЦИЯ СТРАНИЦ + ВЫБОРКА В АДМИНКЕ */
+	
+	
+DROP TABLE IF EXISTS tmp;
+	
+	
+CREATE TEMPORARY TABLE tmp
+	SELECT COUNT(order_id) as count FROM Orders;
+
+
+SELECT O.order_id, O.amount, E.email, O.order_date, T.count 
+	FROM Orders O, tmp T, Email E
+	WHERE O.customer_id = E.customer_id
+	ORDER BY O.order_date DESC
+	LIMIT 20, 10;
+	
+
+
+	
+DROP PROCEDURE IF EXISTS orders_info;
+
+delimiter |
+
+CREATE PROCEDURE orders_info(
+	
+)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+SELECT O.order_id, O.amount, E.email, O.order_date, T.count 
+	FROM Orders O, tmp T, Email E
+	WHERE O.customer_id = E.customer_id
+	ORDER BY O.order_date DESC;
+	
+	
+	
+DELETE FROM Orders WHERE customer_id != ANY (SELECT customer_id FROM Email);
+	
+	
+	
+DELETE FROM Order_Items WHERE customer_id != ANY (SELECT customer_id FROM Orders WHERE customer_id != ANY (SELECT customer_id FROM Email));
+	
+	
+	
+	
+
+SELECT O.order_id FROM Orders O WHERE O.customer_id NOT IN(SELECT E.customer_id FROM Email E WHERE E.customer_id IS NOT NULL);
+
+SELECT O.customer_id FROM Orders O WHERE O.customer_id NOT IN(SELECT E.customer_id FROM Email E WHERE E.customer_id IS NOT NULL);
+
+
+
+
+CREATE TEMPORARY TABLE del_c
+	SELECT O.customer_id FROM Orders O WHERE O.customer_id NOT IN(SELECT E.customer_id FROM Email E WHERE E.customer_id IS NOT NULL);
+	
+	
+CREATE TEMPORARY TABLE del_o
+	SELECT O.order_id FROM Orders O WHERE O.customer_id NOT IN(SELECT E.customer_id FROM Email E WHERE E.customer_id IS NOT NULL);
+	
+DELETE FROM Order_Items WHERE Order_id IN (SELECT order_id FROM del_o);
+
+DELETE FROM Orders WHERE Order_id IN (SELECT order_id FROM del_o);
+	
+DELETE FROM Customers WHERE customer_id IN (SELECT customer_id FROM del_c);
+	
+
+	
+
+
+
+

@@ -1,0 +1,37 @@
+
+
+DROP PROCEDURE IF EXISTS customer_byEmailSearch;
+
+delimiter |
+
+CREATE PROCEDURE customer_byEmailSearch(
+	IN in_email VARCHAR(26)
+	)
+
+BEGIN
+
+	CREATE TEMPORARY TABLE IF NOT EXISTS tmp
+		SELECT customer_id, email FROM email
+		WHERE email LIKE CONCAT(in_email, '%');
+		
+	SELECT T.customer_id, T.email, C.name, C.phone,
+		O.order_id, O.amount, O.order_date, US.login
+		FROM tmp T
+		INNER JOIN Customers C
+			ON T.customer_id = C.customer_id
+		INNER JOIN Orders O
+			ON T.customer_id = O.customer_id
+		LEFT JOIN Users US
+			ON T.customer_id = US.customer_id;
+			
+	DROP TEMPORARY TABLE IF EXISTS tmp;
+
+END; |
+
+delimiter ;
+
+
+
+/* TEST */
+
+CALL customer_byEmailSearch('a');

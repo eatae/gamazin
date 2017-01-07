@@ -1,0 +1,86 @@
+
+
+
+DROP PROCEDURE IF EXISTS orders_searchByDate;
+
+delimiter |
+
+CREATE PROCEDURE orders_searchByDate(
+	IN in_data VARCHAR(10),
+	IN in_start_display_row MEDIUMINT(3)
+	)
+	
+BEGIN
+
+	CREATE TEMPORARY TABLE IF NOT EXISTS tmp
+		SELECT COUNT(order_id) as count FROM Orders
+		WHERE Order_date LIKE CONCAT(in_data, '%');
+		
+	SELECT O.order_id, O.amount, E.email, O.order_date, T.count 
+	FROM Orders O, tmp T, Email E
+	WHERE O.customer_id = E.customer_id
+	AND O.order_date LIKE CONCAT(in_data, '%')
+	ORDER BY O.order_date DESC
+	LIMIT in_start_display_row, 10;
+	
+	DROP TEMPORARY TABLE IF EXISTS tmp;
+	
+END; |
+
+delimiter ;
+
+
+
+
+/* TEST */
+
+CALL orders_searchByDate('2016-12', 0);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* DRAFT */
+
+CREATE TEMPORARY TABLE IF NOT EXISTS tmp
+		SELECT COUNT(order_id) as count FROM Orders
+		WHERE Order_date LIKE CONCAT('2016-12', '%');
+
+
+
+SELECT O.order_id, O.amount, E.email, O.order_date, T.count 
+	FROM Orders O, tmp T, Email E
+	WHERE O.customer_id = E.customer_id
+	AND O.order_date LIKE CONCAT('2016-12', '%')
+	ORDER BY O.order_date DESC
+	LIMIT 0, 10;
+	
+	
+	
+	
+	
+	
+	
+	
+SELECT * FROM Orders WHERE DATE(order_date) = '2016-12';
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

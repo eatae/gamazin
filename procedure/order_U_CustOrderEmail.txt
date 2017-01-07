@@ -1,0 +1,55 @@
+#
+	1) in_user_id
+	2) in_amount
+	
+
+DROP PROCEDURE IF EXISTS order_U_CustOrderEmail;
+
+delimiter |
+
+CREATE PROCEDURE order_U_CustOrderEmail(
+	IN in_name VARCHAR(20),
+	IN in_phone VARCHAR(20),
+	IN in_email VARCHAR(26),
+	IN in_userId MEDIUMINT(8),
+	IN in_amount MEDIUMINT(8)
+	)
+BEGIN
+	DECLARE dec_CustId MEDIUMINT(8);
+	DECLARE dec_OrderId MEDIUMINT(8);
+	DECLARE dec_inspectEmail MEDIUMINT(8) DEFAULT NULL;
+	SELECT user_id FROM email
+		WHERE email = in_email 
+		AND user_id = in_userId
+			INTO dec_inspectEmail;
+	IF(dec_inspectEmail IS NOT NULL)
+	THEN
+		INSERT INTO Customers(name, phone)
+			VALUES(in_name, in_phone);
+		SELECT LAST_INSERT_ID() INTO dec_CustId;
+		UPDATE Users SET customer_id = dec_CustId
+			WHERE user_id = in_userId;
+		UPDATE Email SET customer_id = dec_CustId
+			WHERE user_id = in_userId;
+		INSERT INTO Orders(customer_id, amount) VALUES(dec_CustId, in_amount);
+		SELECT LAST_INSERT_ID() INTO dec_OrderId;
+		SELECT dec_OrderId, dec_CustId;
+	ELSE
+		SELECT NULL;
+	END IF;
+END; |
+
+delimiter ;
+
+
+
+/* TEST */
+
+CALL order_U_CustOrderEmail('User4', '89261752929', 'mail_u4@mail.ru', 4, 200);
+
+
+
+
+
+
+		

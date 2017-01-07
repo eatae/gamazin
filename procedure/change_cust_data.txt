@@ -1,0 +1,102 @@
+
+
+DROP PROCEDURE IF EXISTS change_cust_data;
+
+delimiter |
+
+CREATE PROCEDURE change_cust_data(
+	IN in_userId MEDIUMINT(8),
+	IN in_login VARCHAR(16),
+	IN in_password VARCHAR(40),
+	IN in_phone VARCHAR(20),
+	IN in_name VARCHAR(20),
+	IN in_email VARCHAR(26)
+	)
+BEGIN
+	DECLARE dec_custId MEDIUMINT(8);
+	
+	SELECT customer_id FROM Users
+		WHERE login = in_login
+		AND user_id = in_userId
+		AND password = in_password
+		INTO dec_custId;
+	
+	IF(dec_custId IS NOT NULL)
+	THEN
+		UPDATE Customers C, email E
+			SET
+			C.name = in_name,
+			C.phone = in_phone,
+			E.email = in_email
+				WHERE C.customer_id = dec_custId
+				AND E.customer_id = dec_custId;
+		SELECT dec_custId;
+	ELSE
+		SELECT dec_custId;
+	END IF;
+END; |
+
+delimiter ;
+
+
+			
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/*************** TEST ****************/
+
+/* SELECT NULL */
+
+		
+DROP PROCEDURE IF EXISTS test;
+
+delimiter |
+
+CREATE PROCEDURE test(
+	IN in_login VARCHAR(16),
+	IN in_custId MEDIUMINT(8),
+	IN in_password VARCHAR(40)
+	)
+BEGIN
+	DECLARE dec_userId MEDIUMINT(8);
+	
+	SELECT user_id FROM Users
+		WHERE login = in_login
+		AND customer_id = in_custId
+		AND password = in_password
+		INTO dec_userId;
+	SELECT dec_userId;
+END; |
+
+delimiter ;
+
+		
+CALL test('User5', 37, 55555);
+	
+
+
+	
+	
+	
+	
+	UPDATE Customers C, email E
+			SET
+			C.name = 'Покупатель5',
+			C.phone = '89261778777',
+			E.email = 'user555@mail.ru'
+				WHERE C.customer_id = 370
+				AND E.customer_id = 370;
+	
+		

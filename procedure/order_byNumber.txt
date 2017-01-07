@@ -1,0 +1,91 @@
+
+
+DROP PROCEDURE IF EXISTS order_byNumber;
+
+delimiter |
+	
+	
+CREATE PROCEDURE order_byNumber(
+	IN in_orderId MEDIUMINT(8)
+	)
+BEGIN
+	
+	
+	/* находим название, кол-во и цену */
+	CREATE TEMPORARY TABLE IF NOT EXISTS tmp1
+		SELECT P.title, P.price, OI.quantity
+			FROM Products P
+			INNER JOIN Order_Items OI
+			ON P.product_id = OI.product_id
+			WHERE OI.order_id = in_orderId;
+	
+	
+	/* находим email и сумму */
+	CREATE TEMPORARY TABLE IF NOT EXISTS tmp2
+		SELECT E.email, O.amount FROM Email E, Orders O
+		WHERE
+		O.order_id = in_orderId
+		AND
+		E.customer_id = (SELECT customer_id FROM Orders
+			WHERE order_id = in_orderId);
+		
+		
+	/* смотрим всё из таблиц */
+	SELECT tmp1.title, tmp1.price, tmp1.quantity,
+		tmp2.email, tmp2.amount
+		FROM tmp1, tmp2;
+	
+	
+	DROP TEMPORARY TABLE IF EXISTS tmp1;
+	DROP TEMPORARY TABLE IF EXISTS tmp2;
+END; |
+
+
+delimiter ;
+
+
+
+
+/* TEST */
+
+CALL order_byNumber(16);
+		
+	
+	
+	
+	
+	
+	
+
+	
+	
+/* DRAFT */
+	
+/* находим название, кол-во и цену */
+
+CREATE TEMPORARY TABLE tmp1
+SELECT P.title, P.price, OI.quantity
+	FROM Products P
+	INNER JOIN Order_Items OI
+	ON P.product_id = OI.product_id
+	WHERE OI.order_id = 31;
+	
+	
+/* находим email и сумму */
+
+CREATE TEMPORARY TABLE tmp2
+	SELECT E.email, O.amount FROM Email E, Orders O
+	WHERE
+	O.order_id = 31
+	AND
+	E.customer_id = (SELECT customer_id FROM Orders
+		WHERE order_id = 31);
+	
+
+/* смотрим всё из таблиц */
+	SELECT tmp1.title, tmp1.price, tmp1.quantity,
+		tmp2.email, tmp2.amount
+		FROM tmp1, tmp2;
+	
+
+

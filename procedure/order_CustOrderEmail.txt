@@ -1,0 +1,41 @@
+
+При выполнении заказа:
+ - принимаем имя, мэил и общую сумму заказа.
+ - создаём покупателя - Customer(записываем имя, телефон и получаем его id)
+ - создаём заказ - Order(записываем id покупателя, общую сумму, дата сама установится, получаем id заказа)
+ - создаём Email(записываем id покупателя, и присланый email)
+ - для проверки выводим id заказа.
+
+
+
+
+DROP PROCEDURE IF EXISTS order_CustOrderEmail;
+
+delimiter |
+
+CREATE PROCEDURE order_CustOrderEmail(
+	IN in_name VARCHAR(20),
+	IN in_phone VARCHAR(20),
+	IN in_email VARCHAR(26),
+	IN in_amount MEDIUMINT(8)
+)
+BEGIN
+	DECLARE dec_CustId MEDIUMINT(8);
+	DECLARE dec_OrderId MEDIUMINT(8);
+	INSERT INTO Customers(name, phone) 
+		VALUES(in_name, in_phone);
+	SELECT LAST_INSERT_ID() INTO dec_CustId;
+	INSERT INTO Orders(customer_id, amount) VALUES(dec_CustId, in_amount);
+	SELECT LAST_INSERT_ID() INTO dec_OrderId;
+	INSERT INTO Email(customer_id, email) VALUES(dec_CustID, in_email);
+	SELECT dec_OrderId;
+END; |
+
+delimiter ;
+
+
+
+/* TEST */
+CALL order_CustOrderEmail('test_insert', '89261759293','test_insert@mail.ru', 200);
+
+

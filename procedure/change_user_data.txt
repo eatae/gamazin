@@ -1,0 +1,36 @@
+
+DROP PROCEDURE IF EXISTS change_user_data;
+
+delimiter |
+
+CREATE PROCEDURE change_user_data(
+	IN in_login VARCHAR(16),
+	IN in_password VARCHAR(40),
+	IN in_email VARCHAR(26)
+	)
+BEGIN
+	DECLARE dec_userId MEDIUMINT(8);
+	
+	SELECT user_id FROM Users
+		WHERE login = in_login
+		AND password = in_password
+		INTO dec_userId;
+	
+	IF(dec_userId IS NOT NULL)
+	THEN 
+		UPDATE Email
+			SET email = in_email
+			WHERE user_id = dec_userId;
+			
+		SELECT dec_userId;
+	ELSE
+		SELECT dec_userId;
+	END IF;
+END; |
+
+delimiter ;
+
+
+/* TEST */
+
+CALL change_user_data('User4', '44444', 'user4@mail.ru');

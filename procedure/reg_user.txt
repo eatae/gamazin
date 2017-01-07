@@ -1,0 +1,48 @@
+
+При регистрации пользователя(не покупателя):
+ - принимаем login, password, email.
+ - проверяем нет ли такого login
+ - если такой login отсутствует(IS NULL), то:
+		- создаём пользователя - User(записываем login и password, получаем id пользователя)
+		- создаём Email(записываем email и id пользователя)
+		- для проверки выводим id пользователя.
+ - иначе:
+		- выводим NULL.
+
+
+
+DROP PROCEDURE IF EXISTS reg_user;
+
+delimiter |
+
+CREATE PROCEDURE reg_user(
+	IN in_login VARCHAR(20), 
+	IN in_pass VARCHAR(20),
+	IN in_email VARCHAR(30)
+	)
+BEGIN
+	DECLARE dec_true_login VARCHAR(20);
+	DECLARE dec_user_id MEDIUMINT UNSIGNED;
+	SELECT login FROM users 
+		WHERE login = in_login LIMIT 1
+		INTO dec_true_login;
+	IF dec_true_login IS NULL 
+	THEN
+		INSERT INTO users (login, password)
+			VALUES (in_login, in_pass);
+		SELECT LAST_INSERT_ID()	INTO dec_user_id;
+		INSERT INTO email (email, user_id)
+			VALUES (in_email, dec_user_id);
+		SELECT dec_user_id;
+	ELSE
+		SELECT NULL;
+	END IF;
+END; |
+
+delimiter ;
+
+
+/* TEST */
+CALL reg_user('User1', 11111, 'user1@mail.ru');
+CALL reg_user('User2', 22222, 'user2admin@mail.ru');
+
