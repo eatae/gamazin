@@ -14,7 +14,7 @@ if (!empty($title)) :
 
 		<div class='choice'>
 			<a name='<?=$prods['product_id'] ?>'></a>
-			<img src='<?=$prods['img'] ?>' class='photo'>
+			<img src='<?= (is_file(__DIR__ . '/../' . $prods['img'])) ? $prods['img'] : 'img/def.jpg' ?>' class='photo'>
 			<div class = 'name'>
 				<?=$prods['title'] ?>
 				<span class='price'><?=$prods['price'] ?> кл.</span>

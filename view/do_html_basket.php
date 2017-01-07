@@ -91,7 +91,7 @@ function do_html_basket()
                         </div>
 
 <!--          TEST              -->
-                        <? var_dump( $_SESSION );
+                        <? //var_dump( $_SESSION );
                            //var_dump( $_COOKIE );
                            //var_dump(session_name());
                         ?>

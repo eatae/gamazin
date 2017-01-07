@@ -60,6 +60,12 @@ body {
 	height: 80px;
 	}
 
+#carton2 {
+    /*	border: 2px solid red;*/
+    clear: both;
+    height: 80px;
+}
+
 #carton_reg {
 	border: 1px solid #fff;
 	clear: both;
@@ -216,7 +222,7 @@ input[type=password].pl {
 
 #topmenu input[type='image'] {
 /*	border: 2px solid green;*/
-	display: block;
+    /*display: block;*/
 	padding: 0;
 	margin: 10px 50px 10px 10px;
 	background-image: url(/img/marking/enter.png);
@@ -292,8 +298,9 @@ input[type=password].pl {
 
 #basket {
 /*	border: 1px solid black;*/
-	display: block;
+    display: inline-block;
 	height: 25px;
+    padding: 6px;
 	padding-top: 14px;
 /*	text-decoration: none;*/
 	color: #654d46;
@@ -301,16 +308,38 @@ input[type=password].pl {
 }
 #basket:hover {
 	padding-top: 15px;
-	}
+    color: #ab6e7d;
+}
+
+#admin_panel {
+    /*	border: 1px solid black;*/
+    display: inline-block;
+    height: 25px;
+    padding: 6px;
+    padding-top: 8px;
+    /*	text-decoration: none;*/
+    color: #654d46;
+    font: 13pt "Trebuchet MS", Helvetica, sans-serif;
+    text-align: center;
+    text-decoration: none;
+}
+
+#admin_panel:hover {
+    padding-top: 9px;
+    color: #ab6e7d;
+}
+
+
+
 
 #bottom_leftmenu {
 /*	border: 1px solid black;*/
+    text-align: center;
 	border-top: 2px solid #c0c69b;
-	height: 20px;
 	background-image:
 		url(/img/marking/backgroundlm.jpg);
 	background-repeat: repeat-y;
-	background-position: -440px 0px;
+    background-position: -440px 0;
 	height: 40px;
 	
 	/*border-radius*/
@@ -383,7 +412,7 @@ div.bla {
 
 #wrapContent {
 /*	border: 2px solid black;*/
-	border-left: 2px solid #c0c69b;
+    /*border-left: 2px solid #c0c69b;*/
 	margin: 0px 0px 0px 260px;	
 	}
 
@@ -399,7 +428,7 @@ div.bla {
 	width: 190px;
 	float: left;
 	height: 260px;
-	margin: 10px 19px;
+    margin: 10px 15px;
 	background-image:
 		url(/img/marking/backgroundchoice.jpg);
 	/*border-radius*/
@@ -407,6 +436,12 @@ div.bla {
 	-moz-border-radius:10px;
 	border-radius:10px;
 	}
+
+/* blinking - мигание блока при нажатии */
+
+.choice.blink {
+    background-image: url(/img/marking/backgroundchoice_blink.jpg);
+}
 
 .photo {
 /*	border: 1px solid green;*/
@@ -730,8 +765,8 @@ div.bla {
 	}
 
 .message_box {
-    background-color: floralwhite;
-    margin: 10px 0 15px;
+    background: rgba(186, 215, 139, 0.3) none repeat scroll 0 0;
+    margin: 10px 0 25px;
     border: 1px solid silver;
     padding: 20px 20px 0;
 	}
@@ -748,7 +783,7 @@ div.bla {
 
 .message_box .message {
     font: 12pt "Trebuchet MS", Helvetica, sans-serif;
-    background-color: gainsboro;
+    background-color: white;
     border-top: 1px solid silver;
     padding: 10px 23px;
     margin: 5px -20px 0;
@@ -1429,12 +1464,71 @@ https://html5book.ru/gorizontalnoe-menu/ */
 #search_form input[type='text']:focus:-moz-placeholder           {color: transparent;}
 #search_form input[type='text']:focus:-ms-input-placeholder      {color: transparent;}
 
+/* FIRST PAGE - block description_Block.php */
 
+#description {
+    font-family: Tahoma, Geneva, sans-serif;
+    border: 1px solid #c0c69b;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    float: left;
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+}
 
+.item1 {
+    font-size: 16pt;
+    color: black;
+    margin: 60px 10px 10px 10px;
+}
 
+.item2 {
+    font-size: 14pt;
+    font-weight: bold;
+    color: #7e4a3b;
+    margin: 40px 10px 10px 50px;
+}
 
+.item3 {
+    font-weight: normal;
+    font-size: 14pt;
+    color: #7e4a3b;
+    margin: 10px 10px 10px 40px;
+}
 
+.text_item {
+    font-weight: normal;
+    font-size: 13pt;
+    color: #414141;
+    margin: 10px 10px 10px 40px;
+}
 
+.text_desc {
+    font-size: 14pt;
+    color: #7e4a3b;
+    margin: 20px 20px 10px 20px;
+}
+
+#carton2 {
+    /*	border: 2px solid red;*/
+    clear: both;
+    height: 40px;
+}
+
+/** contacts.php **/
+
+#contacts {
+    font-family: Tahoma, Geneva, sans-serif;
+    border: 1px solid #c0c69b;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 20px;
+    background-color: white;
+}
 
 
 

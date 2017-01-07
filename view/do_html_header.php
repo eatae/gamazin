@@ -29,8 +29,8 @@ function do_html_header( $tit )
 	<script src='/js/leftMenu.js'></script>
 	
 	<!-- AJAX -->
-	<script type='text/javascript' src='/ajax/xmlHttpRequest.js'></script>
-	<script type='text/javascript' src='/ajax/ajax.lib.js'></script>
+	<script type='text/javascript' src='/js/xmlHttpRequest.js'></script>
+	<script type='text/javascript' src='/js/ajaxLibrary.js'></script>
 	
 	<!-- tag <script> for upload_products -->
 	<?=$pageData[2]?>
@@ -54,7 +54,7 @@ function do_html_header( $tit )
 					<ul>
 						<li><a href='<?=$pageData[3]?>index.php' <?=$active_button[0]?>>Почемучто</a></li>
                         <li><a href='<?=$pageData[3]?>guestbook.php' <?=$active_button[1]?>>Отзывы</a></li>
-                        <li><a href='<?=$pageData[3]?>#' <?=$active_button[2]?>>Контакты</a></li>
+						<li><a href='<?= $pageData[3] ?>contacts.php' <?= $active_button[2] ?>>Контакты</a></li>
 					</ul>
 
 					<? getHtmlBlock('enter', $pageData); ?>

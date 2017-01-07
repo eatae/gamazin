@@ -11,8 +11,8 @@ function do_html_main(){
 						<!-- LEFT MENU -->
 					<div id='borderleftmenu'>
 						<div id='leftmenu'>
-						
-								
+
+
 							<div id='up_leftmenu'>
 							    <!-- BASKET -->
 								<a id='basket' href='/basket.php'>Корзина: <?= checkBasketForMain()['count']; ?></a>
@@ -39,37 +39,39 @@ function do_html_main(){
 										</div>
 									</div>
 								</li>
-								
+
 							<?
 							endforeach;
 							?>
 							</ul>
-							
-							<div id='bottom_leftmenu'>
-							    Hi
+
+							<div id='bottom_leftmenu'
+							    <!-- вход в админку -->
+                                <?php if ('admin' == $_SESSION['status']) {
+                                ?>
+                                    <a id='admin_panel' href='/admin/admin_panel.php'>админка</a>
+                                <?php
+                                }
+                                ?>
 							</div>
-							
-							
+
+
 						</div>
 					</div>
 					<!--END LEFT MENU-->
-					
-					
+
+
 					<!--CONTENT-->
 					<div id='wrapContent'>
-						<div id='content'> </div>
-						 <!--картонка-->
-						<div id='carton1'></div>
+						<div id='content'>
+						    <?php include __DIR__ . '/../view_htmlBlock/description_Block.php'; ?>
+						</div>
+						 <!-- clear: both; -->
 					</div>
-						 <!--картонка-->
-<!--					<div id='carton2'></div>-->
+					<div id='carton1'></div>
+                    <!--<div id='carton2'></div>-->
 				</div>
 			</div>
 		</div>
 <?
 }   //end function
-/*
-    echo '<pre>';
-    var_dump($_COOKIE);
-    var_dump( empty($_COOKIE['basket']) );
-*/

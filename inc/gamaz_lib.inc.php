@@ -54,20 +54,21 @@ function getProducts(){
 
 /* ПОЛУЧАЕМ РАСШИРЕНИЕ КАРТИНКИ */
 
-function getTypeImg($type){
-	if($type == 'image/jpeg'){
+function getTypeImg($type)
+{
+    if ($type == 'image/jpeg') {
 		$type = '.jpg';
-		return $type;
-	}else if($type == 'image/gif'){
+    } else if ($type == 'image/gif') {
 		$type = '.gif';
-		return $type;
-	}else if($type == 'image/png'){
+    } else if ($type == 'image/png') {
 		$type = '.png';
-		return $type;
-	}else if($type == 'image/bmp'){
+    } else if ($type == 'image/bmp') {
 		$type = '.bmp';
-		return $type;
-	}else {return false;};
+    } else {
+        return false;
+    }
+
+    return $type;
 }
 
 

@@ -11,7 +11,7 @@ function getHtmlBlock($block, $data = null)
     $path = __DIR__ . '/../view_htmlBlock/' . $block . '_' . $_SESSION['status'] . 'Block.php';
 
     if ( !is_readable($path) || !is_callable($func = include_once($path)) ){
-        echo 'Несрастушечка с блоком';
+        echo "htmlBlock doesn't exist";
         return;
     }
     if (null != $data) {
@@ -20,5 +20,4 @@ function getHtmlBlock($block, $data = null)
     else {
         $func();
     }
-
 }
