@@ -6,7 +6,7 @@ require_once(__DIR__ . "/../inc/gamaz_db.inc.php");
 $title = $_GET['title_name'];
 
 if (!empty($title)) :
-	$sql = "SELECT * FROM products
+	$sql = "SELECT * FROM Products
 				WHERE title = '$title'";
 	$result = mysqli_query($link, $sql) or die('not prdcts'.mysqli_connect_error());
 

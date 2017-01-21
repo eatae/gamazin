@@ -14,17 +14,8 @@ session_start();
 
 
 /** ВЫВОД ТОВАРА **/
-/****************/
-/*------------------------------*/
-/*  Получаем массив меню с помощью getProducts (админка)
-	Далее передаем его  */
+/*****************/
 
-
-
-
-/** АДМИНКА **/
-/************/
-/*------------------------------*/
 
 /* ВЫБОРКА ПРОДУКТОВ ИЗ БАЗЫ */
 
@@ -32,8 +23,8 @@ function getProducts(){
 	global $link;
 	$prods = array();
 	$menu = array();
-	
-	$sql = 'SELECT * FROM products';
+
+    $sql = 'SELECT * FROM Products';
 
 	if(!$result = mysqli_query($link, $sql))
 		throw new Exception('Невозможно подготовить запрос: '.mysqli_connect_error());
@@ -46,8 +37,6 @@ function getProducts(){
 	};
 	mysqli_free_result($result);
 	return $menu;
-	// не закрываем соединение иначе другие не исполнятся
-//	mysqli_close($link);
 }
 
 
@@ -111,8 +100,8 @@ function setProduct(array $upload){
 
 
 /** ОБРАБОТКА ФОРМ **/
-/*******************/
-/*------------------------------*/
+/********************/
+
 
 /* ПРОВЕРЯЕМ ЗАПОЛНЕННОСТЬ ФОРМЫ */
 
@@ -196,8 +185,7 @@ function validName($name){
 
 
 /** РЕГИСТРАЦИЯ ВХОД И ВЫХОД ПОЛЬЗОВАТЕЛЯ **/
-/***************************************/
-/*-------------------------------------*/
+/******************************************/
 
 
 /** РЕГИСТРАЦИЯ ПОЛЬЗОВАТЕЛЯ **/
@@ -249,8 +237,8 @@ function enterUser($login, $pass)
  */
 	$sql = "SELECT U.user_id, U.customer_id,
                    U.admin, E.email
-                FROM users U
-                LEFT JOIN email E
+                FROM Users U
+                LEFT JOIN Email E
                 ON U.user_id = E.user_id
                 WHERE U.login = ?
                   AND U.password = ?";
@@ -305,7 +293,7 @@ function get_user_message()
 	$out_msg = [];
 
 	$sql = "SELECT m.msg, m.date_time, u.login
-              FROM msgs AS m, users as u
+              FROM Msgs AS m, Users as u
               WHERE m.user_id = u.user_id
               ORDER BY m.date_time DESC
               LIMIT 10";
@@ -328,10 +316,10 @@ function save_message($message, $login )
 {
 	global $link;
 
-	$sql = "INSERT INTO msgs(user_id, msg)
+    $sql = "INSERT INTO Msgs(user_id, msg)
               SELECT user_id, ? as msg
-                FROM users
-                WHERE users.login = ?";
+                FROM Users
+                WHERE Users.login = ?";
 
 	$stmt = mysqli_stmt_init($link);
 
@@ -353,6 +341,7 @@ function save_message($message, $login )
 
 
 /*** КОРЗИНА ***/
+/**************/
 
 
 /* basket for main */
@@ -389,7 +378,7 @@ function checkBasketForBasket($basket)
 
     /* array from Db */
     $sql = "SELECT product_id, title, price, img
-              FROM products
+              FROM Products
               WHERE product_id IN($ids)";
 
     if( !$result = mysqli_query($link, $sql)){

@@ -36,21 +36,21 @@
     <div class="item3">
         Войти как <b>User</b>:
         <div class="text_item">
-            User7 &nbsp; 77777
+            user1 &nbsp; 11111
         </div>
     </div>
 
     <div class="item3">
         Войти как <b>User-Customer</b>:
         <div class="text_item">
-            User1 &nbsp; 11111
+            customer &nbsp; 22222
         </div>
     </div>
 
     <div class="item3">
         Войти как <b>Admin</b>:
         <div class="text_item">
-            User2 &nbsp; 22222<br>
+            admin &nbsp; 00000<br>
         </div>
         <br>
 
@@ -114,7 +114,7 @@
         <div class="item2">
             Админка
             <div class="text_item">
-                ( вход: &nbsp; User2 &nbsp; 22222 )<br>
+                ( вход: &nbsp; admin &nbsp; 00000 )<br>
                 ссылка под меню слева
             </div>
 
